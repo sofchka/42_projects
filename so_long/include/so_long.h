@@ -7,6 +7,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 
+# define ESC 65307
+
 typedef struct s_game
 {
 	void	*mlx_ptr;

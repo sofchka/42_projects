@@ -2,8 +2,12 @@
 
 int creat_img(int k, t_game *game)
 {
-	game->x = k;
-	printf("k = %d\n", k);
+	if (k == ESC)
+	{
+		mlx_destroy_window(game->mlx_ptr, game->mlx_win);
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+	}
 	return (0);
 }
 
@@ -26,7 +30,5 @@ int	main()
 
 
 	mlx_loop(game.mlx_ptr);
-	mlx_destroy_display(game.mlx_ptr);
-	free(game.mlx_ptr);
 	return (0);
 }
