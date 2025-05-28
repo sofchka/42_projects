@@ -8,7 +8,7 @@ MLX_PATH = mlx/
 
 MLX_LIB = $(MLX_PATH)libmlx.a
 
-MLX_FLAGS = -lmlx -Lmlx -Imlx -lXext -lX11 -lm -lz -g3
+MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz
 
 LIBFT_PATH = libft/
 
@@ -46,10 +46,9 @@ subsystems:
 	@make -C $(LIBFT_PATH) all
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
 
-clean:z
-	make -C $(MLX_PATH) clean
+clean:
 	make -C $(LIBFT_PATH) clean
 	rm -f $(OBJECTS)
 
