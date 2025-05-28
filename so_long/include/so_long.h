@@ -7,7 +7,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-# define ESC 65307
+# define MK_ERR 1
+# define HEIGHT 600
+# define WIDTH 1200
 
 typedef struct s_game
 {

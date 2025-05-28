@@ -60,8 +60,8 @@ fclean: clean
 
 re: fclean all
 
-norm:
-	norminette libft main.c
+#norm:
+#	norminette libft main.c
 #initializer.c key_hook.c map.c move.c validate_input.c place_images.c main.c so_long.h victory.c helpers.c
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re #norm
