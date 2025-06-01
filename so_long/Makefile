@@ -22,9 +22,8 @@ X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
 
-CFILES = main.c
+CFILES = main.c key_hook.c
 #initializer.c\
-		# key_hook.c\
 		# map.c\
 		# move.c\
 		# validate_input.c\
