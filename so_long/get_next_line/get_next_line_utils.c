@@ -13,14 +13,14 @@
 #include "get_next_line.h"
 
 
-static void	*clean_storage(char *storage)
+void	*clean_storage(char *storage)
 {
 	if (storage)
 		free(storage);
 	return (NULL);
 }
 
-static char	*keep_storage(char *storage)
+char	*keep_storage(char *storage)
 {
 	char	*res;
 	char	*line;
@@ -33,7 +33,7 @@ static char	*keep_storage(char *storage)
 	return (res);
 }
 
-static char	*extract_line(char *storage)
+char	*extract_line(char *storage)
 {
 	char	*line;
 
@@ -45,7 +45,7 @@ static char	*extract_line(char *storage)
 	return (ft_substr(storage, 0, line - storage + 1));
 }
 
-static char	*read_file(int fd, char *storage)
+char	*read_file(int fd, char *storage)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	ssize_t	bytes_read;
