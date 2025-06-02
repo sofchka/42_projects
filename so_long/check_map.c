@@ -11,7 +11,7 @@ void	ft_error(t_game ***g, char *err)
 		x++;
 	}
 	free((**g)->map);
-	fr_printf("%s", err);
+	ft_printf("%s", err);
 	exit(1);
 }
 
@@ -74,20 +74,10 @@ static void	check_surrounded_by_walls(t_game **game)
 		ft_error(&game, err);
 }
 
-int	get_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
 void    check_map_valid(t_game *game)
 {
     game->win_h = get_height(game->map);
 	check_rectangular(&game);
 	check_surrounded_by_walls(&game);
-	check_elements(&game);
+	//check_elements(&game);
 }
