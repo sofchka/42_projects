@@ -12,7 +12,11 @@ MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz
 
 LIBFT_PATH = libft/
 
+FT_PRINTF_PATH = ft_printf/
+
 LIBFT_LIB = $(LIBFT_PATH)libft.a
+
+FT_PRINTF_LIB = $(FT_PRINTF_PATH)libft.a
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -22,15 +26,13 @@ X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
 
-CFILES = main.c key_hook.c
+CFILES = main.c key_hook.c check.c map.c
 #initializer.c\
-		# map.c\
 		# move.c\
 		# validate_input.c\
 		# place_images.c\
 		# main.c\
 		# victory.c\
-		# check_valid_path.c\
 		# helpers.c\
 
 OBJECTS = $(CFILES:.c=.o)
@@ -43,17 +45,20 @@ all: subsystems $(NAME)
 subsystems:
 	@make -C $(MLX_PATH) all
 	@make -C $(LIBFT_PATH) all
+	@make -C $(FT_PRINTF_PATH) all
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) $(FT_PRINTF_LIB) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	make -C $(LIBFT_PATH) clean
+	make -C $(FT_PRINTF_PATH) clean
 	rm -f $(OBJECTS)
 
 fclean: clean
 	make -C $(MLX_PATH) fclean
 	make -C $(LIBFT_PATH) fclean
+	make -C $(FT_PRINTF_PATH) fclean
 	rm -f $(NAME)
 
 re: fclean all

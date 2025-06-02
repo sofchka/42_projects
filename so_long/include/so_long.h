@@ -3,15 +3,14 @@
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
+# include "../ft_printf/ft_printf.h"
 # include <fcntl.h>
 # include <stdlib.h>
 
 # include <stdio.h>
 
 # define ESC 65307
-# define MK_ERR 1
-# define HEIGHT 600
-# define WIDTH 1200
 
 typedef struct s_game
 {
@@ -45,5 +44,11 @@ typedef struct s_map {
 	int	x;
 	int	y;
 }	t_map;
+
+int		key_hook(int key, t_game *vars);
+void	ft_error();
+void	check_file(char *file_line);
+char	**get_map(char *map);
+void    check_map_valid(t_game *game);
 
 #endif
