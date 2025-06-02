@@ -51,9 +51,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# macOS system files
 .DS_Store
-
-# VSCode settings
-.vscode/
-
