@@ -20,18 +20,10 @@ LIBFT_LIB = $(LIBFT_PATH)libft.a
 
 FT_PRINTF_LIB = $(FT_PRINTF_PATH)libftprintf.a
 
-GNL_LIB = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
+CFILES = main.c key_hook.c check.c map.c check_map.c
 
+GNL_FILES = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
 
-Y = "\033[33m"
-R = "\033[31m"
-G = "\033[32m"
-B = "\033[34m"
-X = "\033[0m"
-UP = "\033[A"
-CUT = "\033[K"
-
-CFILES = main.c key_hook.c check.c map.c
 #initializer.c\
 		# move.c\
 		# validate_input.c\
@@ -40,7 +32,7 @@ CFILES = main.c key_hook.c check.c map.c
 		# victory.c\
 		# helpers.c\
 
-OBJECTS = $(CFILES:.c=.o)
+OBJECTS = $(CFILES:.c=.o) $(GNL_FILES:.c=.o)
 
 all: subsystems $(NAME)
 
@@ -53,7 +45,7 @@ subsystems:
 	@make -C $(FT_PRINTF_PATH) all
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) $(GNL_LIB) $(FT_PRINTF_LIB) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(FT_PRINTF_LIB) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	make -C $(LIBFT_PATH) clean

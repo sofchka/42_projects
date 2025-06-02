@@ -45,10 +45,10 @@ typedef struct s_map {
 	int	y;
 }	t_map;
 
-int		key_hook(int key, t_game *vars);
 void	ft_error();
 void	check_file(char *file_line);
 char	**get_map(char *map);
 void    check_map_valid(t_game *game);
+
 
 #endif
