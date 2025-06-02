@@ -20,17 +20,9 @@ LIBFT_LIB = $(LIBFT_PATH)libft.a
 
 FT_PRINTF_LIB = $(FT_PRINTF_PATH)libftprintf.a
 
-CFILES = main.c key_hook.c check.c map.c check_map.c
+CFILES = main.c key_hook.c check_file.c map.c check_map.c utils.c
 
 GNL_FILES = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
-
-#initializer.c\
-		# move.c\
-		# validate_input.c\
-		# place_images.c\
-		# main.c\
-		# victory.c\
-		# helpers.c\
 
 OBJECTS = $(CFILES:.c=.o) $(GNL_FILES:.c=.o)
 

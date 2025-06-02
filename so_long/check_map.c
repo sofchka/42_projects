@@ -79,5 +79,5 @@ void    check_map_valid(t_game *game)
     game->win_h = get_height(game->map);
 	check_rectangular(&game);
 	check_surrounded_by_walls(&game);
-	//check_elements(&game);
+	check_elements(&game);
 }

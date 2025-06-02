@@ -6,16 +6,6 @@ void	ft_error()
 	exit(1);
 }
 
-int	get_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
 int find(char *str, char *str2)
 {
 	int	i;
