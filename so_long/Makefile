@@ -20,7 +20,7 @@ LIBFT_LIB = $(LIBFT_PATH)libft.a
 
 FT_PRINTF_LIB = $(FT_PRINTF_PATH)libftprintf.a
 
-CFILES = main.c key_hook.c check_file.c map.c check_map.c utils.c check_map_2.c
+CFILES = main.c key_hook.c check_file.c map.c check_map.c utils.c check_elements.c
 
 GNL_FILES = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
 

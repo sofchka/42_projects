@@ -34,9 +34,8 @@ int	main(int argc, char *argv[])
 		// mlx_string_put(game.mlx_ptr, game.mlx_win, 5, 10, 0xffffff, "Move: 0");
 		// mlx_loop_hook(game.mlx_ptr, animation, &game);
 		//mlx_loop(game.mlx_ptr);
-		mlx_destroy_window(game.mlx_ptr, game.mlx_win);
-		mlx_destroy_display(game.mlx_ptr);
-		return (0);
+		mlx_destroy_window(game.mlx_ptr, game.mlx_win);//test
+		mlx_destroy_display(game.mlx_ptr);//test
 	}
-	return (1);
+	return (0);
 }
