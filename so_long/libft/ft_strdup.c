@@ -14,25 +14,22 @@
 
 char	*ft_strdup(const char *s)
 {
-	const char	*str;
-	size_t		size;
-	char		*result;
+	size_t	len;
+	char	*res;
+	int		i;
 
-	size = ft_strlen(s);
-	str = (char *)malloc(size + 1);
-	if (!str)
+	if (!s)
 		return (NULL);
-	result = (char *)ft_memcpy((void *)str, s, size);
-	result[size] = '\0';
-	return (result);
+	len = ft_strlen(s);
+	res = (char *)malloc((len + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		res[i] = s[i];
+		++i;
+	}
+	res[i] = '\0';
+	return (res);
 }
-/*
-#include <string.h>
-#include <stdio.h>
-int main()
-{
-	char	str[] = "hello world";
-	char	*result;
-	result = ft_strdup(str);
-	printf("%s", result);
-}*/

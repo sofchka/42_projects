@@ -14,9 +14,14 @@ LIBFT_PATH = libft/
 
 FT_PRINTF_PATH = ft_printf/
 
+GNL_PATH = get_next_line/
+
 LIBFT_LIB = $(LIBFT_PATH)libft.a
 
-FT_PRINTF_LIB = $(FT_PRINTF_PATH)libft.a
+FT_PRINTF_LIB = $(FT_PRINTF_PATH)libftprintf.a
+
+GNL_LIB = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
+
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -48,7 +53,7 @@ subsystems:
 	@make -C $(FT_PRINTF_PATH) all
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) $(FT_PRINTF_LIB) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) -Imlx $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) $(GNL_LIB) $(FT_PRINTF_LIB) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	make -C $(LIBFT_PATH) clean
