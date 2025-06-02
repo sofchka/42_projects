@@ -1,6 +1,6 @@
 #include "include/so_long.h"
 
-void	ft_error(t_game ***g, char *err)
+void	ft_error_map(t_game ***g, char *err)
 {
 	int	x;
 
@@ -32,7 +32,7 @@ static void	check_rectangular(t_game **game)
 		if (backup != 0)
 		{
 			if (backup != x)
-				ft_error(&game,
+				ft_error_map(&game,
 					"\033[1;31m🛑ERROR: map is not rectangular\033[0m");
 		}
 		else
@@ -61,17 +61,17 @@ static void	check_surrounded_by_walls(t_game **game)
 
 	err = "\033[1;31m🛑ERROR: map is not surrounded by walls\033[0m";
 	if (check_line((*game)->map[0]))
-		ft_error(&game, err);
+		ft_error_map(&game, err);
 	i = (*game)->win_h - 1;
 	while (i)
 	{
 		if ((*game)->map[i][0] != '1' ||
 			(*game)->map[i][ft_strlen((*game)->map[i]) - 1] != '1')
-			ft_error(&game, err);
+			ft_error_map(&game, err);
 		i--;
 	}
 	if (check_line((*game)->map[(*game)->win_h - 1]))
-		ft_error(&game, err);
+		ft_error_map(&game, err);
 }
 
 void    check_map_valid(t_game *game)
