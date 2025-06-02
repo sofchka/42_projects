@@ -57,3 +57,9 @@ dkms.conf
 # VSCode settings
 .vscode/
 
+# Editor backup files
+*~
+.*~
+*.swp
+*.swo
+
