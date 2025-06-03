@@ -1,7 +1,7 @@
 /* XPM */
-static char *_8d6208f97ed4c92fd913a699956b0b0vG5ejo3V2dBoy2Ve[] = {
+static char *result[] = {
 /* columns rows colors chars-per-pixel */
-"96 64 8 1 ",
+"32 32 8 1 ",
 "  c None",
 ". c #754C60",
 "X c #90625D",
