@@ -26,7 +26,7 @@ int	main(int argc, char *argv[])
 		init_game(&game);
 		game.mlx_ptr = mlx_init();
 		game.mlx_win = mlx_new_window(game.mlx_ptr,
-				game.win_w * 32, game.win_h * 32, "So-Long");
+				game.win_w * 64, game.win_h * 64, "So-Long");
 		make_map(&game);
 		// mlx_hook(game.mlx_win, 2, (1L << 0), key_hook, &game);
 		// mlx_hook(game.mlx_win, 17, (1L << 0), ft_exit, &game);

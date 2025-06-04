@@ -96,12 +96,12 @@ void	make_map(t_game *game)
 		{
 			put_image_to_map(game->map[y_map][x_map], x1, y1, &game);
 			x_map++;
-			x1 += 32;
+			x1 += 64;
 			game->win_w--;
 		}
 		game->win_w = w;
 		y_map++;
-		y1 += 32;
+		y1 += 64;
 		game->win_h--;
 	}
 }
