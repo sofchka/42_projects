@@ -61,5 +61,5 @@ void	check_elements(t_game **game)
 		}
 	}
 	if (map.c == 0 || map.p == 0 || map.e == 0 || map.p > 1 || map.e > 1)
-		ft_error(&game, ft_err_message(&map));
+		ft_error_map(&game, ft_err_message(&map));
 }

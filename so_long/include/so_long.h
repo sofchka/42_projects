@@ -46,11 +46,13 @@ typedef struct s_map {
 }	t_map;
 
 void	ft_error();
+int		ft_exit(t_game *v);
 void	check_file(char *file_line);
 char	**get_map(char *map);
 void    check_map_valid(t_game *game);
 void	check_elements(t_game **game);
 int		get_height(char **map);
 void	make_map(t_game *game);
+void	ft_error_map(t_game ***g, char *err);
 
 #endif

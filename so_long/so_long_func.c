@@ -1,51 +1,47 @@
 #include "include/so_long.h"
 
-// int	key_hook(int keycode, t_vars *vars)
-// {
-// 	int	x;
+int	key_hook(int keycode, t_game *game)
+{
+	int	x;
 
-// 	if (keycode == 2 || keycode == 124)
-// 		to_right(&vars);
-// 	else if (keycode == 0 || keycode == 123)
-// 		to_left(&vars);
-// 	else if (keycode == 13 || keycode == 126)
-// 		to_up(&vars);
-// 	else if (keycode == 1 || keycode == 125)
-// 		to_down(&vars);
-// 	else if (keycode == 53)
-// 	{
-// 		x = 0;
-// 		while (vars->map[x])
-// 		{
-// 			free(vars->map[x]);
-// 			x++;
-// 		}
-// 		free(vars->map);
-// 		mlx_destroy_window(vars->mlx, vars->win);
-// 		exit(1);
-// 	}
-// 	return (0);
-// }
+	if (keycode == 2 || keycode == 124)
+		to_right(&game);
+	else if (keycode == 0 || keycode == 123)
+		to_left(&game);
+	else if (keycode == 13 || keycode == 126)
+		to_up(&game);
+	else if (keycode == 1 || keycode == 125)
+		to_down(&game);
+	else if (keycode == 53)
+	{
+		x = 0;
+		while (game->map[x])
+		{
+			free(game->map[x]);
+			x++;
+		}
+		free(game->map);
+		mlx_destroy_window(game->mlx_ptr, game->mlx_win);
+		exit(1);
+	}
+	return (0);
+}
 
-// int	ft_exit(t_vars *v)
-// {
-// 	int	x;
+int	ft_exit(t_game *v)
+{
+	int	x;
 
-// 	x = 0;
-// 	while (v->map[x])
-// 	{
-// 		free(v->map[x]);
-// 		x++;
-// 	}
-// 	free(v->map);
-// 	mlx_destroy_window(v->mlx, v->win);
-// 	exit(1);
-// 	return (0);
-// }
-
-
-
-
+	x = 0;
+	while (v->map[x])
+	{
+		free(v->map[x]);
+		x++;
+	}
+	free(v->map);
+	mlx_destroy_window(v->mlx_ptr, v->mlx_win);
+	exit(1);
+	return (0);
+}
 
 void	put_image(t_game ***v, int x, int y, char *img)
 {
