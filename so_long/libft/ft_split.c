@@ -69,7 +69,7 @@ static int	split(char **result, char const *s, char c, int i)
 	return (1);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**res;
 	size_t	len;
@@ -79,12 +79,17 @@ char	**ft_split(char const *s, char c)
 	len = word_count(s, c);
 	res = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!res)
+	{
+		free(s);
 		return (NULL);
+	}
 	if (split(res, s, c, 0) == 0)
 	{
+		free(s);
 		free(res);
 		return (NULL);
 	}
+	free(s);
 	return (res);
 }
 /*
@@ -113,9 +118,9 @@ int compare_arrays(char **arr1, char **arr2)
 int main()
 {
 	char **result;
-	result = ft_split("lorem ipsum dolor sit amet, consectetur 
+	result = ft_split("lorem ipsum dolor sit amet, consectetur
 	!!!!!adapiscing elit. Sed non risus.", 'i');
-	char *expected10[] = {"lorem ", "psum dolor s", "t amet, 
+	char *expected10[] = {"lorem ", "psum dolor s", "t amet,
 	!!!!!!consectetur adap", "sc", "ng el", "t. Sed non r", "sus.", NULL};
 	print_result(compare_arrays(result, expected10));
 	int i = 0;

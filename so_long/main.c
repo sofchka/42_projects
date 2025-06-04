@@ -16,11 +16,10 @@ int	main(int argc, char *argv[])
 {
 	t_game game;
 
-	if (argc < 1)
+	if (argc <= 1)
 		ft_error();
-	(void)argv;
 	check_file(argv[1]);
-	game.map = get_map(ft_strjoin("./maps/", argv[1]));
+	game.map = get_map(argv[1]);
 	if (game.map != NULL)
 	{
 		check_map_valid(&game);
@@ -28,7 +27,7 @@ int	main(int argc, char *argv[])
 		game.mlx_ptr = mlx_init();
 		game.mlx_win = mlx_new_window(game.mlx_ptr,
 				game.win_w * 32, game.win_h * 32, "So-Long");
-		//make_map(&game);
+		make_map(&game);
 		// mlx_hook(game.mlx_win, 2, (1L << 0), key_hook, &game);
 		// mlx_hook(game.mlx_win, 17, (1L << 0), ft_exit, &game);
 		// mlx_string_put(game.mlx_ptr, game.mlx_win, 5, 10, 0xffffff, "Move: 0");

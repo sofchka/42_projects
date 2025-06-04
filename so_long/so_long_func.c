@@ -62,7 +62,6 @@ void	put_image_to_map(char p, int x1, int y1, t_game **v)
 		put_image(&v, x1, y1, "./textures/Water.xpm");
 	else if (p == 'C')
 	{
-		put_image(&v, x1, y1, "./textures/Grass.xpm");
 		put_image(&v, x1, y1, "./textures/Chest.xpm");
 		(*v)->collect++;
 	}
@@ -72,7 +71,6 @@ void	put_image_to_map(char p, int x1, int y1, t_game **v)
 	{
 		(*v)->y_p = y1;
 		(*v)->x_p = x1;
-		put_image(&v, x1, y1, "./textures/Grass.xpm");
 		put_image(&v, x1, y1, "./textures/front.xpm");
 	}
 	else

@@ -2,7 +2,6 @@
 
 void	ft_error()
 {
-	write(1, "a12", 1);
 	perror("\033[1;31m🛑ERROR:\033[0m");
 	exit(1);
 }

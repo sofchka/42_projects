@@ -14,14 +14,14 @@ char	**get_map(char *map)
 	while (line)
 	{
 		line = get_next_line(fd);
-		if (line == NULL || line[0] == '\n')
+		if (line == NULL)
 			break ;
 		all_lines = ft_strjoin(all_lines, line);
 		free(line);
 	}
 	free(line);
 	close(fd);
-	if (all_lines[0] == '\0')
+	if (!all_lines || all_lines[0] == '\0')
 		ft_error();
 	return (ft_split(all_lines, '\n'));
 }
