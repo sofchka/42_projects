@@ -22,15 +22,7 @@ static char	*ft_err_message(t_map *map)
 
 char	*unknown_element(t_game ***v, char c)
 {
-	int	x;
-
-	x = 0;
-	while ((**v)->map[x])
-	{
-		free((**v)->map[x]);
-		x++;
-	}
-	free((**v)->map);
+	free_map((**v)->map);
 	ft_printf("\033[1;31m🛑ERROR: Unknown element %c \033[0m", c);
 	exit(1);
 }

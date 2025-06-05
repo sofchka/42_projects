@@ -1,18 +1,15 @@
 #include "include/so_long.h"
 
-
-// int	key_hook(int keycode, t_game *game)
-// {
-// 	printf("Keycode pressed: %d\n", keycode); // 👈 This line will print the keycode
-// 	game->collect++;
-// 	// Your original logic here...
-// 	return (0);
-// }
+int	ft_exit(t_game *v)
+{
+	free_map(v->map);
+	mlx_destroy_window(v->mlx_ptr, v->mlx_win);
+	exit(1);
+	return (0);
+}
 
 int	key_hook(int keycode, t_game *game)
 {
-	int	x;
-
 	if (keycode == 100 || keycode == 65363)
 		to_right(&game);
 	else if (keycode == 97 || keycode == 65361)
@@ -22,48 +19,7 @@ int	key_hook(int keycode, t_game *game)
 	else if (keycode == 115 || keycode == 65364)
 		to_down(&game);
 	else if (keycode == 65307)
-	{
-		free_map(game->map);
-		mlx_destroy_window(game->mlx_ptr, game->mlx_win);
-		system("leaks so_long"); 
-		exit(1);
-	}
-	return (0);
-}
-
-//original
-// int	key_hook(int keycode, t_game *game)
-// {
-// 	int	x;
-
-// 	if (keycode == 2 || keycode == 124)
-// 		to_right(&game);
-// 	else if (keycode == 0 || keycode == 123)
-// 		to_left(&game);
-// 	else if (keycode == 13 || keycode == 126)
-// 		to_up(&game);
-// 	else if (keycode == 1 || keycode == 125)
-// 		to_down(&game);
-// 	else if (keycode == 53)
-// 	{
-// 		x = 0;
-// 		while (game->map[x])
-// 		{
-// 			free(game->map[x]);
-// 			x++;
-// 		}
-// 		free(game->map);
-// 		mlx_destroy_window(game->mlx_ptr, game->mlx_win);
-// 		exit(1);
-// 	}
-// 	return (0);
-// }
-
-int	ft_exit(t_game *v)
-{
-	free_map(v->map);
-	mlx_destroy_window(v->mlx_ptr, v->mlx_win);
-	exit(1);
+		ft_exit(game);
 	return (0);
 }
 
