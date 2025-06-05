@@ -54,5 +54,13 @@ void	check_elements(t_game **game);
 int		get_height(char **map);
 void	make_map(t_game *game);
 void	ft_error_map(t_game ***g, char *err);
+int		key_hook(int keycode, t_game *game);
+void	to_right(t_game **v);
+void	to_left(t_game **v);
+void	to_up(t_game **v);
+void	to_down(t_game **v);
+void	put_text(t_game ***v);
+void	exit_door(t_game ***v);
+void	free_map(char **map);
 
 #endif

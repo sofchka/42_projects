@@ -2,13 +2,15 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+# CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -I/opt/X11/include
 
 MLX_PATH = mlx/
 
 MLX_LIB = $(MLX_PATH)libmlx.a
 
-MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz
+# MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz
+MLX_FLAGS = -lmlx -Lmlx -L/opt/X11/lib -lXext -lX11 -lm -lz
 
 LIBFT_PATH = libft/
 
@@ -20,7 +22,7 @@ LIBFT_LIB = $(LIBFT_PATH)libft.a
 
 FT_PRINTF_LIB = $(FT_PRINTF_PATH)libftprintf.a
 
-CFILES = main.c so_long_func.c check_file.c map.c check_map.c utils.c check_elements.c
+CFILES = main.c so_long_func.c check_file.c move.c map.c check_map.c utils.c check_elements.c
 
 GNL_FILES = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
 

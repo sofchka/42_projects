@@ -35,7 +35,7 @@ void	to_left(t_game **v)
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 		collected(&v);
 	(*v)->mlx_img = mlx_xpm_file_to_image(
-			(*v)->mlx_ptr, "./img/left.xpm", &img_w, &img_h);
+			(*v)->mlx_ptr, "./textures/front.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(
 		(*v)->mlx_ptr, (*v)->mlx_win, (*v)->mlx_img, (*v)->x_p, (*v)->y_p);
 }
@@ -62,7 +62,7 @@ void	to_right(t_game **v)
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 		collected(&v);
 	(*v)->mlx_img = mlx_xpm_file_to_image(
-			(*v)->mlx_ptr, "./img/right.xpm", &img_w, &img_h);
+			(*v)->mlx_ptr, "./textures/front.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(
 		(*v)->mlx_ptr, (*v)->mlx_win, (*v)->mlx_img, (*v)->x_p, (*v)->y_p);
 }
@@ -89,7 +89,7 @@ void	to_up(t_game **v)
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 		collected(&v);
 	(*v)->mlx_img = mlx_xpm_file_to_image(
-			(*v)->mlx_ptr, "./img/back.xpm", &img_w, &img_h);
+			(*v)->mlx_ptr, "./textures/back.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(
 		(*v)->mlx_ptr, (*v)->mlx_win, (*v)->mlx_img, (*v)->x_p, (*v)->y_p);
 }
@@ -116,7 +116,7 @@ void	to_down(t_game **v)
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 		collected(&v);
 	(*v)->mlx_img = mlx_xpm_file_to_image(
-			(*v)->mlx_ptr, "./img/front.xpm", &img_w, &img_h);
+			(*v)->mlx_ptr, "./textures/front.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(
 		(*v)->mlx_ptr, (*v)->mlx_win, (*v)->mlx_img, (*v)->x_p, (*v)->y_p);
 }

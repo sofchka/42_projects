@@ -2,15 +2,7 @@
 
 void	ft_error_map(t_game ***g, char *err)
 {
-	int	x;
-
-	x = 0;
-	while ((**g)->map[x])
-	{
-		free((**g)->map[x]);
-		x++;
-	}
-	free((**g)->map);
+	free_map((**g)->map);
 	ft_printf("%s", err);
 	exit(1);
 }
