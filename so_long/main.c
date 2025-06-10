@@ -1,20 +1,27 @@
 #include "include/so_long.h"
 
+void	ft_error(void)
+{
+	perror("\033[1;31mError\n");
+	exit(1);
+}
+
+void	check_file(char *file_line)
+{
+	if (ft_strncmp(file_line + ft_strlen(file_line) - 4, ".ber", 4) != 0)
+		ft_error();
+}
+
 static void	init_game(t_game *vars)
 {
 	vars->collect = 0;
 	vars->movement = 0;
 	vars->win_w = ft_strlen(vars->map[0]);
-	// vars->e_vars.sign = 1;
-	// vars->e_vars.x = 0;
-	// vars->e_vars.sleep = 5;
-	// vars->e_vars.sleep_for_move = 60;
-	// vars->e_vars.path_to_move = 0;
 }
 
 int	main(int argc, char *argv[])
 {
-	t_game game;
+	t_game	game;
 
 	if (argc <= 1)
 		ft_error();
@@ -31,10 +38,7 @@ int	main(int argc, char *argv[])
 		mlx_hook(game.mlx_win, 17, (1L << 0), ft_exit, &game);
 		mlx_key_hook(game.mlx_win, key_hook, &game);
 		mlx_string_put(game.mlx_ptr, game.mlx_win, 30, 30, 0xffffff, "Move: 0");
-		// mlx_loop_hook(game.mlx_ptr, animation, &game);
 		mlx_loop(game.mlx_ptr);
-		mlx_destroy_window(game.mlx_ptr, game.mlx_win);//test
-		mlx_destroy_display(game.mlx_ptr);//test
 	}
 	return (0);
 }

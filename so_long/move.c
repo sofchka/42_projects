@@ -7,23 +7,11 @@ static void	collected(t_game ***v)
 
 	(**v)->collect--;
 	(**v)->map[((**v)->y_p / 64)][((**v)->x_p / 64)] = 'O';
-	mlx_destroy_image((**v)->mlx_ptr, (**v)->mlx_img);
 	(**v)->mlx_img = mlx_xpm_file_to_image(
 			(**v)->mlx_ptr, "./textures/Chest2.xpm", &img_w, &img_h);
 	mlx_put_image_to_window(
 		(**v)->mlx_ptr, (**v)->mlx_win, (**v)->mlx_img, (**v)->x_p, (**v)->y_p);
-}
-
-void	image_change(t_game **v, char *path)
-{
-	int		img_w;
-	int		img_h;
-
-	mlx_destroy_image((*v)->mlx_ptr, (*v)->mlx_img);
-	(*v)->mlx_img = mlx_xpm_file_to_image(
-			(*v)->mlx_ptr, path, &img_w, &img_h);
-	mlx_put_image_to_window(
-		(*v)->mlx_ptr, (*v)->mlx_win, (*v)->mlx_img, (*v)->x_p, (*v)->y_p);
+	mlx_destroy_image((**v)->mlx_ptr, (**v)->mlx_img);
 }
 
 void	to_left(t_game **v)

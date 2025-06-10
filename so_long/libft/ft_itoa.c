@@ -58,22 +58,3 @@ char	*ft_itoa(int n)
 		res[0] = '-';
 	return (res);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-void	print_result(int success)
-{
-	if (success)
-		printf("ok \n");
-	else
-		printf("qaq\n");
-}
-
-int	main()
-{
-	char *result;
-	result = ft_itoa(-2147);
-	printf("%s\n", result);
-	print_result(strcmp(result, "-2147") == 0);
-	free(result);
-}*/

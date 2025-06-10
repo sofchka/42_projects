@@ -36,15 +36,3 @@ int	ft_atoi(const char *str)
 	}
 	return (numb * sign);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	char *alo = "        123a";
-	int b = atoi(alo);
-	int a = ft_atoi(alo);
-
-	printf("%i", a);
-	printf("%i", b);
-	return (0);
-}*/

@@ -1,5 +1,15 @@
 #include "include/so_long.h"
 
+int	get_height(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
+
 int	ft_exit(t_game *v)
 {
 	free_map(v->map);
@@ -23,61 +33,33 @@ int	key_hook(int keycode, t_game *game)
 	return (0);
 }
 
-void	put_image(t_game ***v, int x, int y, char *img)
+void	exit_door(t_game ***v)
 {
+	free_map((**v)->map);
+	mlx_destroy_window((**v)->mlx_ptr, (**v)->mlx_win);
+	exit(1);
+}
+
+void	put_text(t_game ***v)
+{
+	char	*text;
+	char	*number;
 	int		img_w;
 	int		img_h;
 
-	(**v)->mlx_img = mlx_xpm_file_to_image((**v)->mlx_ptr, img, &img_w, &img_h);
-	mlx_put_image_to_window((**v)->mlx_ptr, (**v)->mlx_win, (**v)->mlx_img, x, y);
-}
-
-void	put_image_to_map(char p, int x1, int y1, t_game **v)
-{
-	if (p == '1')
-		put_image(&v, x1, y1, "./textures/Water.xpm");
-	else if (p == 'C')
-	{
-		put_image(&v, x1, y1, "./textures/Chest.xpm");
-		(*v)->collect++;
-	}
-	else if (p == 'E')
-		put_image(&v, x1, y1, "./textures/Egg.xpm");
-	else if (p == 'P')
-	{
-		(*v)->y_p = y1;
-		(*v)->x_p = x1;
-		put_image(&v, x1, y1, "./textures/front.xpm");
-	}
-	else
-		put_image(&v, x1, y1, "./textures/Grass.xpm");
-}
-
-void	make_map(t_game *game)
-{
-	int	y1;
-	int	y_map;
-	int	w;
-	int	x1;
-	int	x_map;
-
-	y1 = 0;
-	y_map = 0;
-	w = game->win_w;
-	while (game->win_h > 0)
-	{
-		x1 = 0;
-		x_map = 0;
-		while (game->win_w > 0)
-		{
-			put_image_to_map(game->map[y_map][x_map], x1, y1, &game);
-			x_map++;
-			x1 += 64;
-			game->win_w--;
-		}
-		game->win_w = w;
-		y_map++;
-		y1 += 64;
-		game->win_h--;
-	}
+	ft_putnbr(++(**v)->movement);
+	number = ft_itoa((**v)->movement);
+	text = ft_strjoin("Move: ", number, 1);
+	(**v)->mlx_img = mlx_xpm_file_to_image(
+			(**v)->mlx_ptr, "./textures/Water.xpm", &img_w, &img_h);
+	mlx_put_image_to_window(
+		(**v)->mlx_ptr, (**v)->mlx_win, (**v)->mlx_img, 0, 0);
+	mlx_put_image_to_window(
+		(**v)->mlx_ptr, (**v)->mlx_win, (**v)->mlx_img, 64, 0);
+	mlx_put_image_to_window(
+		(**v)->mlx_ptr, (**v)->mlx_win, (**v)->mlx_img, 64 * 2, 0);
+	mlx_string_put((**v)->mlx_ptr, (**v)->mlx_win, 30, 30, 0xfffffff, text);
+	mlx_destroy_image((**v)->mlx_ptr, (**v)->mlx_img);
+	free(text);
+	free(number);
 }

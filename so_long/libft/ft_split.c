@@ -92,39 +92,3 @@ char	**ft_split(char *s, char c)
 	free(s);
 	return (res);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-void print_result(int success)
-{
-    if (success)
-        printf("ok\n");
-    else
-        printf("Qaq\n");
-}
-
-int compare_arrays(char **arr1, char **arr2)
-{
-    int i = 0;
-    while (arr1[i] && arr2[i]) {
-        if (strcmp(arr1[i], arr2[i]) != 0)
-            return 0;
-        i++;
-    }
-    return arr1[i] == NULL && arr2[i] == NULL;
-}
-
-int main()
-{
-	char **result;
-	result = ft_split("lorem ipsum dolor sit amet, consectetur
-	!!!!!adapiscing elit. Sed non risus.", 'i');
-	char *expected10[] = {"lorem ", "psum dolor s", "t amet,
-	!!!!!!consectetur adap", "sc", "ng el", "t. Sed non r", "sus.", NULL};
-	print_result(compare_arrays(result, expected10));
-	int i = 0;
-	while (result[i])
-		free(result[i++]);
-	free(result);
-}*/

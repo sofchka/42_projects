@@ -41,7 +41,6 @@ static char	*ft_strjoin_2(char const *s1, char const *s2)
 	return (str);
 }
 
-
 void	*clean_storage(char *storage)
 {
 	if (storage)

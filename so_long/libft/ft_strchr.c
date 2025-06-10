@@ -26,10 +26,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
-/*
-#include <string.h>
-#include <stdio.h>
-int main()
-{    
-	printf("%s", ft_strchr("Hello, World!", 'W'));
-}*/

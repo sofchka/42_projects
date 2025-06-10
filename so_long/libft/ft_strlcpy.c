@@ -26,18 +26,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	*dst = '\0';
 	return (i);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-int main() 
-{
-	char dest[40];
-	const char *src = "aalaaaax alo vaxo  !!";
-
-	size_t result = strlcpy(dest, src, 21);
-
-	printf("%s\n", dest);
-	printf("Len: %zu\n", result);
-
-	return 0;
-}*/

@@ -3,7 +3,7 @@
 void	ft_error_map(t_game ***g, char *err)
 {
 	free_map((**g)->map);
-	ft_printf("%s", err);
+	perror(err);
 	exit(1);
 }
 
@@ -25,7 +25,7 @@ static void	check_rectangular(t_game **game)
 		{
 			if (backup != x)
 				ft_error_map(&game,
-					"\033[1;31m🛑ERROR: map is not rectangular\033[0m");
+					"\033[1;31mError\nMap is not rectangular\n");
 		}
 		else
 			backup = x;
@@ -51,7 +51,7 @@ static void	check_surrounded_by_walls(t_game **game)
 	int		i;
 	char	*err;
 
-	err = "\033[1;31m🛑ERROR: map is not surrounded by walls\033[0m";
+	err = "\033[1;31mError\nMap is not surrounded by walls\n";
 	if (check_line((*game)->map[0]))
 		ft_error_map(&game, err);
 	i = (*game)->win_h - 1;
@@ -66,9 +66,9 @@ static void	check_surrounded_by_walls(t_game **game)
 		ft_error_map(&game, err);
 }
 
-void    check_map_valid(t_game *game)
+void	check_map_valid(t_game *game)
 {
-    game->win_h = get_height(game->map);
+	game->win_h = get_height(game->map);
 	check_rectangular(&game);
 	check_surrounded_by_walls(&game);
 	check_elements(&game);
