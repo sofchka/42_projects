@@ -7,6 +7,15 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
+typedef struct s_enemy
+{
+	int		x_e;
+	int		y_e;
+	int		x;
+	int		sleep_for_move;
+	char	*imgs[5];
+}	t_enemy;
+
 typedef struct s_game
 {
 	void	*mlx_ptr;
@@ -19,17 +28,20 @@ typedef struct s_game
 	int		movement;
 	char	**map;
 	int		collect;
+	t_enemy	e_var;
 }	t_game;
 
-typedef struct s_map {
-	int	c;
-	int	p;
-	int	e;
-	int	x;
-	int	y;
+typedef struct s_map
+{
+	int		c;
+	int		p;
+	int		e;
+	int		x;
+	int		y;
 }	t_map;
 
-void	ft_error();
+int		animation(t_game *vars);
+void	ft_error(void);
 int		ft_exit(t_game *v);
 void	check_file(char *file_line);
 char	**get_map(char *map);
@@ -47,5 +59,6 @@ void	put_text(t_game ***v);
 void	exit_door(t_game ***v);
 void	free_map(char **map);
 void	image_change(t_game **v, char *path);
+void	get_position_for_enemy(t_game **v);//bonus
 
 #endif

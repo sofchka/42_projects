@@ -18,7 +18,7 @@ GNL_PATH = get_next_line/
 
 LIBFT_LIB = $(LIBFT_PATH)libft.a
 
-CFILES = main.c so_long_func.c move.c map.c check_map.c check_elements.c
+CFILES = main.c so_long_func.c move.c map.c check_map.c check_elements.c e_anim.c
 
 GNL_FILES = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
 

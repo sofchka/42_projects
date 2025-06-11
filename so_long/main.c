@@ -17,6 +17,11 @@ static void	init_game(t_game *vars)
 	vars->collect = 0;
 	vars->movement = 0;
 	vars->win_w = ft_strlen(vars->map[0]);
+	vars->win_h = get_height(vars->map);
+	vars->e_var.x = 0;
+	vars->e_var.sleep_for_move = 105;
+	if (vars->win_h > 3)
+		get_position_for_enemy(&vars);
 }
 
 int	main(int argc, char *argv[])
@@ -38,6 +43,7 @@ int	main(int argc, char *argv[])
 		mlx_hook(game.mlx_win, 17, (1L << 0), ft_exit, &game);
 		mlx_key_hook(game.mlx_win, key_hook, &game);
 		mlx_string_put(game.mlx_ptr, game.mlx_win, 30, 30, 0xffffff, "Move: 0");
+		mlx_loop_hook(game.mlx_ptr, animation, &game);
 		mlx_loop(game.mlx_ptr);
 	}
 	return (0);
