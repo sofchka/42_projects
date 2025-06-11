@@ -35,7 +35,11 @@ void	check_elements_2(t_game ***game, t_map *map)
 			if ((**game)->map[(*map).y][(*map).x] == 'E')
 				(*map).e++;
 			else if ((**game)->map[(*map).y][(*map).x] == 'P')
+			{
 				(*map).p++;
+				(**game)->x_p = (*map).x;
+				(**game)->y_p = (*map).y;
+			}
 			else if ((**game)->map[(*map).y][(*map).x] == 'C')
 				(*map).c++;
 			else if ((**game)->map[(*map).y][(*map).x] != '1' &&
@@ -61,4 +65,5 @@ void	check_elements(t_game **game)
 	check_elements_2(&game, &map);
 	if (map.c == 0 || map.p == 0 || map.e == 0 || map.p > 1 || map.e > 1)
 		ft_error_map(&game, ft_err_message(&map));
+	(*game)->collect = map.c;
 }

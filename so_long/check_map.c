@@ -72,4 +72,5 @@ void	check_map_valid(t_game *game)
 	check_rectangular(&game);
 	check_surrounded_by_walls(&game);
 	check_elements(&game);
+	check_valid_path(game);
 }

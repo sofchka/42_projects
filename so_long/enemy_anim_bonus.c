@@ -1,37 +1,10 @@
 #include "include/so_long.h"
 
-int	ft_abs(int nb)
+static int	ft_abs(int nb)
 {
 	if (nb < 0)
 		return (-nb);
 	return (nb);
-}
-
-void	get_position_for_enemy(t_game **v)
-{
-	int			y;
-	int			x;
-
-	y = 1;
-	(*v)->win_h = get_height((*v)->map);
-	while (y < (*v)->win_h - 1)
-	{
-		x = 1;
-		while ((*v)->map[y][x] != '\0' && x < (*v)->win_w - 1)
-		{
-			if ((*v)->map[y][x] == '0' && ((*v)->map[y + 1][x] == '0' ||
-			(*v)->map[y - 1][x] == '0' || (*v)->map[y][x + 1] == '0' ||
-			(*v)->map[y][x - 1] == '0'))
-			{
-				(*v)->e_var.x_e = x;
-				(*v)->e_var.y_e = y;
-				(*v)->e_var.x = 1;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
 }
 
 void	open_exit(t_game **v)
@@ -63,20 +36,7 @@ void	open_exit(t_game **v)
 	}
 }
 
-void	put_img(t_game **vars, char *path)
-{
-	int		img_w;
-	int		img_h;
-
-	(*vars)->mlx_img = mlx_xpm_file_to_image(
-			(*vars)->mlx_ptr, path, &img_w, &img_h);
-	mlx_put_image_to_window(
-		(*vars)->mlx_ptr, (*vars)->mlx_win, (*vars)->mlx_img, 
-		(*vars)->e_var.x_e * 64, (*vars)->e_var.y_e * 64);
-	mlx_destroy_image((*vars)->mlx_ptr, (*vars)->mlx_img);
-}
-
-void	move_enemy(t_game **v, int x_e, int y_e)
+int	move_enemy(t_game **v, int x_e, int y_e)
 {
 	if (ft_abs((*v)->x_p / 64 - x_e) > ft_abs((*v)->y_p / 64 - y_e))
 	{
@@ -100,13 +60,12 @@ void	move_enemy(t_game **v, int x_e, int y_e)
 		else if ((*v)->x_p / 64 < x_e && (*v)->map[y_e][x_e - 1] != '1')
 			(*v)->e_var.x_e--;
 	}
-	if ((*v)->e_var.x_e < x_e || (*v)->e_var.y_e > y_e)
-		put_img(v, "./textures/cow2.xpm");
-	else
-		put_img(v, "./textures/cow.xpm");
+	if ((*v)->x_p / 64 < x_e)
+		return (2);
+	return (1);
 }
 
-void	map_repair(t_game **var, int x, int y)
+void	map_enemy_move(t_game **var, int x, int y)
 {
 	if ((*var)->map[y][x] == 'O')
 		put_img(var, "./textures/Chest2.xpm");
@@ -118,28 +77,35 @@ void	map_repair(t_game **var, int x, int y)
 		put_img(var, "./textures/Egg.xpm");
 	else
 		put_img(var, "./textures/Grass.xpm");
+	(*var)->e_var.img = move_enemy(var, x, y);
+	(*var)->e_var.sleep_for_move = 35;
+	if ((*var)->e_var.img == 2)
+		put_img(var, "./textures/cow2.xpm");
+	else
+		put_img(var, "./textures/cow.xpm");
 }
 
-int animation(t_game *vars)
+int	animation(t_game *vars)
 {
 	if (vars->e_var.x == 1)
 	{
-		put_img(&vars, "./textures/cow.xpm");
+		if (vars->e_var.img == 2)
+			put_img(&vars, "./textures/cow2.xpm");
+		else
+			put_img(&vars, "./textures/cow.xpm");
 		if ((vars->e_var.y_e == vars->y_p / 64)
 			&& (vars->e_var.x_e == vars->x_p / 64))
 		{
 			free_map(vars->map);
-			write(1, "You Lost :)\n", 12);
+			write(1, "You Lost :)\nYou got killed by MO-MO\n", 37);
 			exit(0);
 		}
 		if (vars->e_var.sleep_for_move-- <= 0)
-		{
-			map_repair(&vars, vars->e_var.x_e, vars->e_var.y_e);
-			move_enemy(&vars, vars->e_var.x_e, vars->e_var.y_e);
-			vars->e_var.sleep_for_move = 30;
-		}
+			map_enemy_move(&vars, vars->e_var.x_e, vars->e_var.y_e);
 	}
 	if (vars->collect <= 0)
 		open_exit(&vars);
+	if (vars->collect > 0 && vars->chest_sleep-- <= 0)
+		chest_animation(&vars);
 	return (0);
 }

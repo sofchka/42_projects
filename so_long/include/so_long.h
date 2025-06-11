@@ -13,8 +13,8 @@ typedef struct s_enemy
 	int		y_e;
 	int		x;
 	int		sleep_for_move;
-	char	*imgs[5];
-}	t_enemy;
+	int		img;
+}	t_enemy;//bonus
 
 typedef struct s_game
 {
@@ -28,7 +28,12 @@ typedef struct s_game
 	int		movement;
 	char	**map;
 	int		collect;
-	t_enemy	e_var;
+	int		exit;
+	int		collected;
+	int		chest_sleep;//bonus
+	int		chest_img;//bonus
+	char	*p[4];//bonus
+	t_enemy	e_var;//bonus
 }	t_game;
 
 typedef struct s_map
@@ -40,12 +45,12 @@ typedef struct s_map
 	int		y;
 }	t_map;
 
-int		animation(t_game *vars);
 void	ft_error(void);
 int		ft_exit(t_game *v);
 void	check_file(char *file_line);
 char	**get_map(char *map);
 void    check_map_valid(t_game *game);
+void	check_valid_path(t_game *game);
 void	check_elements(t_game **game);
 int		get_height(char **map);
 void	make_map(t_game *game);
@@ -59,6 +64,9 @@ void	put_text(t_game ***v);
 void	exit_door(t_game ***v);
 void	free_map(char **map);
 void	image_change(t_game **v, char *path);
+int		animation(t_game *vars);//bonus
 void	get_position_for_enemy(t_game **v);//bonus
+void	put_img(t_game **vars, char *path);//bonus
+void	chest_animation(t_game **v);//bonus
 
 #endif
