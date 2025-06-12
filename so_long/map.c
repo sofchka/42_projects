@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 21:36:11 by szakarya          #+#    #+#             */
+/*   Updated: 2025/06/12 21:36:13 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/so_long.h"
 
 void	image_change(t_game **v, char *path)
@@ -19,18 +31,19 @@ char	**get_map(char *map)
 	char	*tmp;
 	char	*line;
 
-	line = "";
+	line = get_next_line(fd);
 	all_lines = ft_strdup("");
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_error();
-	while ((line = get_next_line(fd)))
+	while (line)
 	{
 		tmp = ft_strjoin(all_lines, line, 0);
 		if (!tmp)
 			break ;
 		free(line);
 		all_lines = tmp;
+		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);

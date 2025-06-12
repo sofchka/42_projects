@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy_anim_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 21:35:10 by szakarya          #+#    #+#             */
+/*   Updated: 2025/06/12 21:35:12 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/so_long.h"
 
 static int	ft_abs(int nb)
@@ -78,7 +90,7 @@ void	map_enemy_move(t_game **var, int x, int y)
 	else
 		put_img(var, "./textures/Grass.xpm");
 	(*var)->e_var.img = move_enemy(var, x, y);
-	(*var)->e_var.sleep_for_move = 35;
+	(*var)->e_var.sleep_for_move = 3000;//35 for mac
 	if ((*var)->e_var.img == 2)
 		put_img(var, "./textures/cow2.xpm");
 	else

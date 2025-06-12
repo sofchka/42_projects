@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy_anim_utils_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 21:35:19 by szakarya          #+#    #+#             */
+/*   Updated: 2025/06/12 21:35:30 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/so_long.h"
 
 void	get_position_for_enemy(t_game **v)
@@ -76,5 +88,5 @@ void	chest_animation(t_game **v)
 		(*v)->chest_img = 0;
 	else
 		(*v)->chest_img++;
-	(*v)->chest_sleep = 15;
+	(*v)->chest_sleep = 900;//25 for mac
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 21:33:11 by szakarya          #+#    #+#             */
+/*   Updated: 2025/06/12 21:33:15 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/so_long.h"
 
 void	ft_error(void)
@@ -19,8 +31,8 @@ static void	init_game(t_game *vars)
 	vars->win_w = ft_strlen(vars->map[0]);
 	vars->win_h = get_height(vars->map);
 	vars->e_var.x = 0;
-	vars->e_var.sleep_for_move = 200;
-	vars->chest_sleep = 15;
+	vars->e_var.sleep_for_move = 10000;//250 for mac
+	vars->chest_sleep = 900;//25 for mac
 	vars->p[0] = "./textures/Chest.xpm";
 	vars->p[1] = "./textures/Chest_1.xpm";
 	vars->p[2] = "./textures/Chest1.xpm";
