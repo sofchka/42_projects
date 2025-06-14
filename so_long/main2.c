@@ -31,8 +31,8 @@ static void	init_game(t_game *vars)
 	vars->win_w = ft_strlen(vars->map[0]);
 	vars->win_h = get_height(vars->map);
 	vars->e_var.x = 0;
-	vars->e_var.sleep_for_move = 10000;//250 for mac
-	vars->chest_sleep = 900;//25 for mac
+	vars->e_var.sleep_for_move = 250;
+	vars->chest_sleep = 25;
 	vars->p[0] = "./textures/Chest.xpm";
 	vars->p[1] = "./textures/Chest_1.xpm";
 	vars->p[2] = "./textures/Chest1.xpm";

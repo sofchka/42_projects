@@ -42,6 +42,7 @@ char	**copy_map(char **map)
 	new_map = malloc(sizeof(char *) * (i + 1));
 	if (!new_map)
 		return (NULL);
+	j = 0;
 	while (j < i)
 	{
 		new_map[j] = ft_strdup(map[j]);

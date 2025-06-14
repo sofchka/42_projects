@@ -88,5 +88,5 @@ void	chest_animation(t_game **v)
 		(*v)->chest_img = 0;
 	else
 		(*v)->chest_img++;
-	(*v)->chest_sleep = 900;//25 for mac
+	(*v)->chest_sleep = 25;
 }

@@ -90,7 +90,7 @@ void	map_enemy_move(t_game **var, int x, int y)
 	else
 		put_img(var, "./textures/Grass.xpm");
 	(*var)->e_var.img = move_enemy(var, x, y);
-	(*var)->e_var.sleep_for_move = 3000;//35 for mac
+	(*var)->e_var.sleep_for_move = 40;
 	if ((*var)->e_var.img == 2)
 		put_img(var, "./textures/cow2.xpm");
 	else

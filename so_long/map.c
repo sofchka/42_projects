@@ -31,11 +31,11 @@ char	**get_map(char *map)
 	char	*tmp;
 	char	*line;
 
-	line = get_next_line(fd);
 	all_lines = ft_strdup("");
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_error();
+	line = get_next_line(fd);
 	while (line)
 	{
 		tmp = ft_strjoin(all_lines, line, 0);
