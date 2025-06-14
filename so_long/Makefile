@@ -2,15 +2,15 @@ NAME = so_long
 
 CC = cc
 
-# CFLAGS = -Wall -Wextra -Werror -g # for ubuntu
-CFLAGS = -Wall -Wextra -Werror -g -I/opt/X11/include # for macos
+CFLAGS = -Wall -Wextra -Werror -g # for ubuntu
+# CFLAGS = -Wall -Wextra -Werror -g -I/opt/X11/include # for macos
 
 MLX_PATH = mlx/
 
 MLX_LIB = $(MLX_PATH)libmlx.a
 
-# MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz # for ubuntu
-MLX_FLAGS = -lmlx -Lmlx -L/opt/X11/lib -lXext -lX11 -lm -lz #for macos
+MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz # for ubuntu
+# MLX_FLAGS = -lmlx -Lmlx -L/opt/X11/lib -lXext -lX11 -lm -lz #for macos
 
 LIBFT_PATH = libft/
 
