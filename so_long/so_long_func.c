@@ -26,8 +26,9 @@ int	ft_exit(t_game *v)
 {
 	free_map(v->map);
 	mlx_destroy_window(v->mlx_ptr, v->mlx_win);
+	mlx_destroy_display(v->mlx_ptr);
+	free(v->mlx_ptr);
 	exit(1);
-	return (0);
 }
 
 int	key_hook(int keycode, t_game *game)
@@ -49,6 +50,8 @@ void	exit_door(t_game ***v)
 {
 	free_map((**v)->map);
 	mlx_destroy_window((**v)->mlx_ptr, (**v)->mlx_win);
+	mlx_destroy_display((**v)->mlx_ptr);
+	free((**v)->mlx_ptr);
 	exit(1);
 }
 

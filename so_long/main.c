@@ -28,7 +28,10 @@ static void	init_game(t_game *vars)
 {
 	vars->collect = 0;
 	vars->movement = 0;
+	vars->mlx_ptr = NULL;
+	vars->mlx_win = NULL;
 	vars->win_w = ft_strlen(vars->map[0]);
+	vars->win_h = get_height(vars->map);
 }
 
 int	main(int argc, char *argv[])

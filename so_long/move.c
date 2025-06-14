@@ -30,14 +30,11 @@ void	to_left(t_game **v)
 {
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'O')
 		image_change(v, "./textures/Chest2.xpm");
+	else if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'E')
+		image_change(v, "./textures/Egg.xpm");
 	else
 		image_change(v, "./textures/Grass.xpm");
-	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64) - 1] == 'E')
-	{
-		if ((*v)->collect <= 0)
-			exit_door(&v);
-	}
-	else if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64) - 1] != '1')
+	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64) - 1] != '1')
 	{
 		if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 			collected(&v);
@@ -45,20 +42,22 @@ void	to_left(t_game **v)
 		put_text(&v);
 	}
 	image_change(v, "./textures/left.xpm");
+	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
+	&& (*v)->collect <= 0)
+	{
+		exit_door(&v);
+	}
 }
 
 void	to_right(t_game **v)
 {
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'O')
 		image_change(v, "./textures/Chest2.xpm");
+	else if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'E')
+		image_change(v, "./textures/Egg.xpm");
 	else
 		image_change(v, "./textures/Grass.xpm");
-	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64) + 1] == 'E')
-	{
-		if ((*v)->collect <= 0)
-			exit_door(&v);
-	}
-	else if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64) + 1] != '1')
+	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64) + 1] != '1')
 	{
 		if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 			collected(&v);
@@ -66,20 +65,22 @@ void	to_right(t_game **v)
 		put_text(&v);
 	}
 	image_change(v, "./textures/right.xpm");
+	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
+	&& (*v)->collect <= 0)
+	{
+		exit_door(&v);
+	}
 }
 
 void	to_up(t_game **v)
 {
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'O')
 		image_change(v, "./textures/Chest2.xpm");
+	else if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'E')
+		image_change(v, "./textures/Egg.xpm");
 	else
 		image_change(v, "./textures/Grass.xpm");
-	if ((*v)->map[((*v)->y_p / 64) - 1][((*v)->x_p / 64)] == 'E')
-	{
-		if ((*v)->collect <= 0)
-			exit_door(&v);
-	}
-	else if ((*v)->map[((*v)->y_p / 64) - 1][((*v)->x_p / 64)] != '1')
+	if ((*v)->map[((*v)->y_p / 64) - 1][((*v)->x_p / 64)] != '1')
 	{
 		if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 			collected(&v);
@@ -87,20 +88,22 @@ void	to_up(t_game **v)
 		put_text(&v);
 	}
 	image_change(v, "./textures/back.xpm");
+	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
+	&& (*v)->collect <= 0)
+	{
+		exit_door(&v);
+	}
 }
 
 void	to_down(t_game **v)
 {
 	if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'O')
 		image_change(v, "./textures/Chest2.xpm");
+	else if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'E')
+		image_change(v, "./textures/Egg.xpm");
 	else
 		image_change(v, "./textures/Grass.xpm");
-	if ((*v)->map[((*v)->y_p / 64) + 1][((*v)->x_p / 64)] == 'E')
-	{
-		if ((*v)->collect <= 0)
-			exit_door(&v);
-	}
-	else if ((*v)->map[((*v)->y_p / 64) + 1][((*v)->x_p / 64)] != '1')
+	if ((*v)->map[((*v)->y_p / 64) + 1][((*v)->x_p / 64)] != '1')
 	{
 		if ((*v)->map[((*v)->y_p / 64)][((*v)->x_p / 64)] == 'C')
 			collected(&v);
@@ -108,4 +111,9 @@ void	to_down(t_game **v)
 		put_text(&v);
 	}
 	image_change(v, "./textures/front.xpm");
+	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
+	&& (*v)->collect <= 0)
+	{
+		exit_door(&v);
+	}
 }
