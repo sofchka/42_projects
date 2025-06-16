@@ -14,6 +14,8 @@
 
 void	ft_error(void)
 {
+	if (errno == 0)
+		errno = EIO;
 	perror("\033[1;31mError\n");
 	exit(1);
 }

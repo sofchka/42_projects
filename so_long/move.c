@@ -45,7 +45,7 @@ void	to_left(t_game **v)
 	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
 	&& (*v)->collect <= 0)
 	{
-		exit_door(&v);
+		ft_exit(*v);
 	}
 }
 
@@ -68,7 +68,7 @@ void	to_right(t_game **v)
 	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
 	&& (*v)->collect <= 0)
 	{
-		exit_door(&v);
+		ft_exit(*v);
 	}
 }
 
@@ -91,7 +91,7 @@ void	to_up(t_game **v)
 	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
 	&& (*v)->collect <= 0)
 	{
-		exit_door(&v);
+		ft_exit(*v);
 	}
 }
 
@@ -114,6 +114,6 @@ void	to_down(t_game **v)
 	if ((*v)->map[(*v)->y_p / 64][((*v)->x_p / 64)] == 'E'
 	&& (*v)->collect <= 0)
 	{
-		exit_door(&v);
+		ft_exit(*v);
 	}
 }

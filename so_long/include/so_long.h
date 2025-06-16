@@ -6,6 +6,7 @@
 # include "../get_next_line/get_next_line.h"
 # include <fcntl.h>
 # include <stdlib.h>
+# include <errno.h>
 
 typedef struct s_enemy
 {
@@ -61,7 +62,6 @@ void	to_left(t_game **v);
 void	to_up(t_game **v);
 void	to_down(t_game **v);
 void	put_text(t_game ***v);
-void	exit_door(t_game ***v);
 void	free_map(char **map);
 void	image_change(t_game **v, char *path);
 int		animation(t_game *vars);//bonus
