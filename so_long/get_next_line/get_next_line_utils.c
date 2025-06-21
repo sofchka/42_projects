@@ -68,7 +68,7 @@ char	*extract_line(char *storage)
 	if (!storage || !*storage)
 		return (NULL);
 	line = ft_strchr(storage, '\n');
-	if (!line)
+	if (!line || !*line)
 		return (ft_substr(storage, 0, ft_strlen(storage)));
 	return (ft_substr(storage, 0, line - storage + 1));
 }

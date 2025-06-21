@@ -2,15 +2,13 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g # for ubuntu
-# CFLAGS = -Wall -Wextra -Werror -g -I/opt/X11/include # for macos
+CFLAGS = -Wall -Wextra -Werror
 
 MLX_PATH = mlx/
 
 MLX_LIB = $(MLX_PATH)libmlx.a
 
-MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz # for ubuntu
-# MLX_FLAGS = -lmlx -Lmlx -L/opt/X11/lib -lXext -lX11 -lm -lz #for macos
+MLX_FLAGS = -lmlx -Lmlx -lXext -lX11 -lm -lz
 
 LIBFT_PATH = libft/
 
@@ -49,13 +47,12 @@ clean:
 	rm -f $(OBJECTS_BONUS)
 
 fclean: clean
-	make -C $(MLX_PATH) fclean
 	make -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
 
 re: fclean all
 
 norm:
-	norminette libft get_next_line $(CFILES) enemy_anim_bonus.c enemy_anim_utils_bonus.c main2.c
+	norminette libft get_next_line $(CFILES) enemy_anim_bonus.c enemy_anim_utils_bonus.c main2.c include
 
 .PHONY: all clean fclean re norm bonus

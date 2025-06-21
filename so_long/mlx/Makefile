@@ -16,7 +16,7 @@ all	: do_configure
 do_configure	:
 	./configure
 
-fclean	:
+clean	:
 	./configure clean
 
-re	: fclean all
+re	: clean all

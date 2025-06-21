@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 20:24:19 by szakarya          #+#    #+#             */
+/*   Updated: 2025/06/17 20:24:24 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -49,8 +61,8 @@ typedef struct s_map
 void	ft_error(void);
 int		ft_exit(t_game *v);
 void	check_file(char *file_line);
-char	**get_map(char *map);
-void    check_map_valid(t_game *game);
+char	**get_map(char *map, int fd, char *tmp, char *line);
+void	check_map_valid(t_game *game);
 void	check_valid_path(t_game *game);
 void	check_elements(t_game **game);
 int		get_height(char **map);

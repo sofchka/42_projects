@@ -40,10 +40,10 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	if (argc <= 1)
+	if (argc != 2)
 		ft_error();
 	check_file(argv[1]);
-	game.map = get_map(argv[1]);
+	game.map = get_map(argv[1], 0, NULL, NULL);
 	if (game.map != NULL)
 	{
 		check_map_valid(&game);
@@ -57,5 +57,4 @@ int	main(int argc, char *argv[])
 		mlx_string_put(game.mlx_ptr, game.mlx_win, 30, 30, 0xffffff, "Move: 0");
 		mlx_loop(game.mlx_ptr);
 	}
-	return (0);
 }

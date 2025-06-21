@@ -24,18 +24,15 @@ void	image_change(t_game **v, char *path)
 	mlx_destroy_image((*v)->mlx_ptr, (*v)->mlx_img);
 }
 
-char	**get_map(char *map)
+char	**get_map(char *map, int fd, char *tmp, char *line)
 {
 	char	*all_lines;
-	int		fd;
-	char	*tmp;
-	char	*line;
 
-	all_lines = ft_strdup("");
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_error();
 	line = get_next_line(fd);
+	all_lines = ft_strdup("");
 	while (line)
 	{
 		tmp = ft_strjoin(all_lines, line, 0);
@@ -48,7 +45,10 @@ char	**get_map(char *map)
 	free(line);
 	close(fd);
 	if (!all_lines || all_lines[0] == '\0')
+	{
+		free(all_lines);
 		ft_error();
+	}
 	return (ft_split(all_lines, '\n'));
 }
 

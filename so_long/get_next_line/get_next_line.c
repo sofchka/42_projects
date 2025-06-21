@@ -26,5 +26,7 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (storage = clean_storage(storage));
 	storage = keep_storage(storage);
+	if (ft_strlen(line) <= 3)
+		return (free(storage), free(line), NULL);
 	return (line);
 }

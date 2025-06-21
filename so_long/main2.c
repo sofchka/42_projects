@@ -38,8 +38,8 @@ static void	init_game(t_game *vars)
 	vars->e_var.y_e = 0;
 	vars->e_var.x_e = 0;
 	vars->e_var.img = 0;
-	vars->e_var.sleep_for_move = 3600;
-	vars->chest_sleep = 60;
+	vars->e_var.sleep_for_move = 36000;
+	vars->chest_sleep = 30;
 	vars->p[0] = "./textures/Chest.xpm";
 	vars->p[1] = "./textures/Chest_1.xpm";
 	vars->p[2] = "./textures/Chest1.xpm";
@@ -53,10 +53,10 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	if (argc <= 1)
+	if (argc != 2)
 		ft_error();
 	check_file(argv[1]);
-	game.map = get_map(argv[1]);
+	game.map = get_map(argv[1], 0, NULL, NULL);
 	if (game.map != NULL)
 	{
 		check_map_valid(&game);

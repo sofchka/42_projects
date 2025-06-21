@@ -90,7 +90,7 @@ void	map_enemy_move(t_game **var, int x, int y)
 	else
 		put_img(var, "./textures/Grass.xpm");
 	(*var)->e_var.img = move_enemy(var, x, y);
-	(*var)->e_var.sleep_for_move = 2000;
+	(*var)->e_var.sleep_for_move = 12000;
 	if ((*var)->e_var.img == 2)
 		put_img(var, "./textures/cow2.xpm");
 	else
@@ -108,9 +108,8 @@ int	animation(t_game *vars)
 		if ((vars->e_var.y_e == vars->y_p / 64)
 			&& (vars->e_var.x_e == vars->x_p / 64))
 		{
-			free_map(vars->map);
 			write(1, "You Lost :)\nYou got killed by MO-MO\n", 37);
-			exit(0);
+			ft_exit(vars);
 		}
 		if (vars->e_var.sleep_for_move-- <= 0)
 			map_enemy_move(&vars, vars->e_var.x_e, vars->e_var.y_e);
