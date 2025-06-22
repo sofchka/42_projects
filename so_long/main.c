@@ -54,7 +54,6 @@ int	main(int argc, char *argv[])
 		make_map(&game);
 		mlx_hook(game.mlx_win, 17, (1L << 0), ft_exit, &game);
 		mlx_key_hook(game.mlx_win, key_hook, &game);
-		mlx_string_put(game.mlx_ptr, game.mlx_win, 30, 30, 0xffffff, "Move: 0");
 		mlx_loop(game.mlx_ptr);
 	}
 }

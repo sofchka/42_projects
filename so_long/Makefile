@@ -18,7 +18,7 @@ LIBFT_LIB = $(LIBFT_PATH)libft.a
 
 CFILES = main.c so_long_func.c move.c map.c check_map.c check_path.c check_elements.c
 
-CFILES_BONUS = main2.c so_long_func.c move.c map.c check_map.c check_path.c check_elements.c enemy_anim_bonus.c enemy_anim_utils_bonus.c
+CFILES_BONUS = main2.c so_long_func_bonus.c move.c map.c check_map.c check_path.c check_elements.c enemy_anim_bonus.c enemy_anim_utils_bonus.c
 
 GNL_FILES = $(GNL_PATH)get_next_line.c $(GNL_PATH)get_next_line_utils.c
 
@@ -53,6 +53,6 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette libft get_next_line $(CFILES) enemy_anim_bonus.c enemy_anim_utils_bonus.c main2.c include
+	norminette libft get_next_line $(CFILES) enemy_anim_bonus.c enemy_anim_utils_bonus.c main2.c include so_long_func_bonus.c
 
 .PHONY: all clean fclean re norm bonus
