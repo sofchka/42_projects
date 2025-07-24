@@ -2,9 +2,9 @@
 
 void	end(char *str, t_philo	**philos)
 {
-	pthread_mutex_lock(philos[0]->print);
+	pthread_mutex_lock(&philos[0]->state->print);
 	printf("%s", str);
-	pthread_mutex_unlock(philos[0]->print);
+	pthread_mutex_unlock(&philos[0]->state->print);
 }
 
 void	*monitor(void *arg)
@@ -44,7 +44,7 @@ void	*start_routine(void *arg)
 	if (philo->id % 2 != 0)
 	{
 		if (philo->state->n >= 5)
-			usleep(200000);
+			usleep(20000);
 		else
 			usleep(1000);
 	}

@@ -38,7 +38,6 @@ static int	init_philo(t_philo **p, int i, t_state *s)
 	p[i]->last = s->start_time;
 	p[i]->left_fork = i;
 	p[i]->right_fork = (i + 1) % s->n;
-	p[i]->print = &s->print;
 	p[i]->state = s;
 	return (1);
 }
