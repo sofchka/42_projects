@@ -56,13 +56,13 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 != 0)
-	{
-		if (philo->state->n >= 5)
-			usleep(10000);
-		else
-			usleep(1000);
-	}
+	// if (philo->id % 2 != 0)
+	// {
+	// 	if (philo->state->n >= 5)
+	// 		usleep(10000);
+	// 	else
+	// 		usleep(1000);
+	// }
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	pthread_mutex_unlock(&philo->last_mutex);
