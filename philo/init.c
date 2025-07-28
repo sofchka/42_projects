@@ -22,7 +22,7 @@ static int	init_philo(t_philo **p, int i, t_state *s)
 {
 	p[i] = (t_philo *)malloc(sizeof(t_philo));
 	if (!p[i] || pthread_mutex_init(&p[i]->last_mutex, NULL) != 0
-		|| pthread_mutex_init(&p[i]->check, NULL) != 0)
+		|| pthread_mutex_init(&s->died_mutex, NULL) != 0)
 	{
 		while (--i >= 0)
 			free(p[i]);
@@ -30,6 +30,7 @@ static int	init_philo(t_philo **p, int i, t_state *s)
 		while (++i < s->n)
 			pthread_mutex_destroy(&s->fork[i]);
 		pthread_mutex_destroy(&s->print);
+		pthread_mutex_destroy(&s->died_mutex);
 		free(p);
 		free(s->fork);
 		return (0);

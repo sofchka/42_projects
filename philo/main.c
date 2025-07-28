@@ -18,6 +18,7 @@ void	ft_free(t_state	*state, t_philo	**phi)
 				free(phi[i]);
 		}
 		pthread_mutex_destroy(&state->print);
+		pthread_mutex_destroy(&state->died_mutex);
 		free(phi);
 	}
 }

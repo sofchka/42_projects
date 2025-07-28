@@ -2,8 +2,13 @@
 
 void	status(t_philo *phi, char *s)
 {
+	pthread_mutex_lock(&phi->state->died_mutex);
 	if (phi->state->someone_died == 1)
+	{
+		pthread_mutex_unlock(&phi->state->died_mutex);
 		return ;
+	}
+	pthread_mutex_unlock(&phi->state->died_mutex);
 	pthread_mutex_lock(&phi->state->print);
 	printf("%lld %d %s\n", get_time() - phi->state->start_time, phi->id + 1, s);
 	pthread_mutex_unlock(&phi->state->print);
@@ -11,23 +16,36 @@ void	status(t_philo *phi, char *s)
 
 void	dead(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->state->print);
+	pthread_mutex_lock(&philo->state->died_mutex);
 	if (!philo->state->someone_died)
 	{
 		philo->state->someone_died = 1;
+		pthread_mutex_unlock(&philo->state->died_mutex);
+		pthread_mutex_lock(&philo->state->print);
 		printf("%lld %d died\n", get_time() - philo->state->start_time,
 			philo->id + 1);
+		pthread_mutex_unlock(&philo->state->print);
 	}
-	pthread_mutex_unlock(&philo->state->print);
+	else
+		pthread_mutex_unlock(&philo->state->died_mutex);
 }
 
 void	sleeping(long long time, t_state *state)
 {
-	long long	start; //aaaaaaa
+	long long	start;
 
 	start = get_time();
-	while (!state->someone_died && get_time() - start < time)
+	while (1)
+	{
+		pthread_mutex_lock(&state->died_mutex);
+		if (state->someone_died || get_time() - start >= time)
+		{
+			pthread_mutex_unlock(&state->died_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&state->died_mutex);
 		usleep(100);
+	}
 }
 
 int	smaller(int a, int b, int *c)
@@ -46,8 +64,13 @@ int	eating(t_philo *philo)
 	int	first;
 	int	second;
 
+	pthread_mutex_lock(&philo->state->died_mutex);
 	if (philo->state->someone_died)
+	{
+		pthread_mutex_unlock(&philo->state->died_mutex);
 		return (1);
+	}
+	pthread_mutex_unlock(&philo->state->died_mutex);
 	first = smaller(philo->left_fork, philo->right_fork, &second);
 	pthread_mutex_lock(&philo->state->fork[first]);
 	status(philo, "has taken a fork");
