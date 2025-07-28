@@ -32,9 +32,7 @@ void	*monitor(void *arg)
 			}
 			if (p[i]->state->to_eat != -1 && p[i]->eaten >= p[i]->state->to_eat)
 			{
-				pthread_mutex_lock(&p[i]->check);
 				all_ate++;
-				pthread_mutex_unlock(&p[i]->check);
 			}
 			if (p[0]->state->to_eat != -1 && all_ate == p[0]->state->n)
 				return (end("✅ All philos have eaten enough: DONE\n", p), NULL);
