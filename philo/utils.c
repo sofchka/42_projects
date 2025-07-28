@@ -3,14 +3,14 @@
 void	status(t_philo *phi, char *s)
 {
 	pthread_mutex_lock(&phi->state->died_mutex);
-	if (phi->state->someone_died == 1)
+	if (phi->state->someone_died)
 	{
 		pthread_mutex_unlock(&phi->state->died_mutex);
 		return ;
 	}
 	pthread_mutex_unlock(&phi->state->died_mutex);
 	pthread_mutex_lock(&phi->state->print);
-	printf("%lld %d %s\n", get_time() - phi->state->start_time, phi->id + 1, s);
+	printf("%lld %d %s (eaten: %d)\n", get_time() - phi->state->start_time, phi->id + 1, s, phi->eaten);
 	pthread_mutex_unlock(&phi->state->print);
 }
 

@@ -46,7 +46,7 @@ void	*monitor(void *arg)
 			end("✅ All philos have eaten enough: DONE\n", p);
 			return (NULL);
 		}
-		usleep(1000);
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -59,7 +59,7 @@ void	*start_routine(void *arg)
 	if (philo->id % 2 != 0)
 	{
 		if (philo->state->n >= 5)
-			usleep(20000);
+			usleep(10000);
 		else
 			usleep(1000);
 	}
@@ -105,8 +105,8 @@ int	start(t_state *state, t_philo **philo)
 		if (pthread_create(&philo[i]->thread, NULL, start_routine, philo[i]))
 		{
 			pthread_mutex_lock(&state->died_mutex);
-            state->someone_died = 1;
-            pthread_mutex_unlock(&state->died_mutex);
+			state->someone_died = 1;
+			pthread_mutex_unlock(&state->died_mutex);
 			pthread_join(death, NULL);
 			j = -1;
 			while (++j < i)
