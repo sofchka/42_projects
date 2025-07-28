@@ -21,7 +21,8 @@ long long	get_time(void)
 static int	init_philo(t_philo **p, int i, t_state *s)
 {
 	p[i] = (t_philo *)malloc(sizeof(t_philo));
-	if (!p[i] || pthread_mutex_init(&p[i]->last_mutex, NULL) != 0)
+	if (!p[i] || pthread_mutex_init(&p[i]->last_mutex, NULL) != 0
+		|| pthread_mutex_init(&p[i]->check, NULL) != 0)
 	{
 		while (--i >= 0)
 			free(p[i]);

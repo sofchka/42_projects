@@ -23,7 +23,7 @@ void	dead(t_philo *philo)
 
 void	sleeping(long long time, t_state *state)
 {
-	long long	start;
+	long long	start; //aaaaaaa
 
 	start = get_time();
 	while (!state->someone_died && get_time() - start < time)

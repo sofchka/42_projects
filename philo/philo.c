@@ -31,7 +31,11 @@ void	*monitor(void *arg)
 				return (end("🔴 ENDED WITH DEATH :(\n", p), NULL);
 			}
 			if (p[i]->state->to_eat != -1 && p[i]->eaten >= p[i]->state->to_eat)
+			{
+				pthread_mutex_lock(&p[i]->check);
 				all_ate++;
+				pthread_mutex_unlock(&p[i]->check);
+			}
 			if (p[0]->state->to_eat != -1 && all_ate == p[0]->state->n)
 				return (end("✅ All philos have eaten enough: DONE\n", p), NULL);
 		}
@@ -52,7 +56,9 @@ void	*start_routine(void *arg)
 		else
 			usleep(1000);
 	}
+	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
+	pthread_mutex_unlock(&philo->last_mutex);
 	while (!philo->state->someone_died)
 	{
 		if (eating(philo))

@@ -13,6 +13,7 @@ void	ft_free(t_state	*state, t_philo	**phi)
 		{
 			pthread_mutex_destroy(&state->fork[i]);
 			pthread_mutex_destroy(&phi[i]->last_mutex);
+			pthread_mutex_destroy(&phi[i]->check);
 			if (phi[i])
 				free(phi[i]);
 		}
