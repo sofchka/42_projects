@@ -58,7 +58,9 @@ int	eating(t_philo *philo)
 	}
 	pthread_mutex_lock(&philo->state->fork[second]);
 	status(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
+	pthread_mutex_unlock(&philo->last_mutex);
 	status(philo, "is eating");
 	philo->eaten++;
 	sleeping(philo->state->teat, philo->state);

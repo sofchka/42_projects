@@ -9,9 +9,10 @@ void	end(char *str, t_philo	**philos)
 
 void	*monitor(void *arg)
 {
-	t_philo	**p;
-	int		i;
-	int		all_ate;
+	t_philo		**p;
+	int			i;
+	int			all_ate;
+	long long	time_since_last;
 
 	p = (t_philo **)arg;
 	usleep(5000);
@@ -21,7 +22,10 @@ void	*monitor(void *arg)
 		i = -1;
 		while (++i < p[0]->state->n)
 		{
-			if (get_time() - p[i]->last >= p[i]->state->tdie)
+			pthread_mutex_lock(&p[i]->last_mutex);
+			time_since_last = get_time() - p[i]->last;
+			pthread_mutex_unlock(&p[i]->last_mutex);
+			if (time_since_last >= p[i]->state->tdie)
 			{
 				dead(p[i]);
 				return (end("🔴 ENDED WITH DEATH :(\n", p), NULL);

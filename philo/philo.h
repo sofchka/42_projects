@@ -13,7 +13,7 @@ typedef struct s_philo
 	int				eaten;//for each philo
 	int				left_fork;
 	int				right_fork;
-	//pthread_mutex_t	last_mutex;
+	pthread_mutex_t	last_mutex;
 	long long		last;//for each philo
 	struct s_state	*state;
 	pthread_t		thread;//routine
