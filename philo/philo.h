@@ -9,14 +9,14 @@
 
 typedef struct s_philo
 {
-	int				id;//indexx of philos
-	int				eaten;//for each philo
+	int				id;
+	int				eaten;
 	int				left_fork;
 	int				right_fork;
 	pthread_mutex_t	last_mutex;
-	long long		last;//for each philo
+	long long		last;
 	struct s_state	*state;
-	pthread_t		thread;//routine
+	pthread_t		thread;
 }	t_philo;
 
 typedef struct s_state
@@ -28,7 +28,7 @@ typedef struct s_state
 	int				teat;
 	int				tsleep;
 	long long		start_time;
-	pthread_mutex_t died_mutex;
+	pthread_mutex_t	died_mutex;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
 }	t_state;

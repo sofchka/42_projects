@@ -18,24 +18,33 @@ void	*monitor(void *arg)
 	usleep(5000);
 	while (1)
 	{
+		pthread_mutex_lock(&p[0]->state->died_mutex);
+		if (p[0]->state->someone_died)
+		{
+			pthread_mutex_unlock(&p[0]->state->died_mutex);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&p[0]->state->died_mutex);
 		all_ate = 0;
 		i = -1;
 		while (++i < p[0]->state->n)
 		{
 			pthread_mutex_lock(&p[i]->last_mutex);
 			time_since_last = get_time() - p[i]->last;
-			pthread_mutex_unlock(&p[i]->last_mutex);
 			if (time_since_last >= p[i]->state->tdie)
 			{
+				pthread_mutex_unlock(&p[i]->last_mutex);
 				dead(p[i]);
-				return (end("🔴 ENDED WITH DEATH :(\n", p), NULL);
+				return (NULL);
 			}
 			if (p[i]->state->to_eat != -1 && p[i]->eaten >= p[i]->state->to_eat)
-			{
 				all_ate++;
-			}
-			if (p[0]->state->to_eat != -1 && all_ate == p[0]->state->n)
-				return (end("✅ All philos have eaten enough: DONE\n", p), NULL);
+			pthread_mutex_unlock(&p[i]->last_mutex);
+		}
+		if (p[0]->state->to_eat != -1 && all_ate == p[0]->state->n)
+		{
+			end("✅ All philos have eaten enough: DONE\n", p);
+			return (NULL);
 		}
 		usleep(1000);
 	}
@@ -57,13 +66,24 @@ void	*start_routine(void *arg)
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	pthread_mutex_unlock(&philo->last_mutex);
-	while (!philo->state->someone_died)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->state->died_mutex);
+		if (philo->state->someone_died)
+		{
+			pthread_mutex_unlock(&philo->state->died_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&philo->state->died_mutex);
 		if (eating(philo))
 			break ;
-		if (philo->state->to_eat != -1
-			&& philo->eaten >= philo->state->to_eat)
+		pthread_mutex_lock(&philo->last_mutex);
+		if (philo->state->to_eat != -1 && philo->eaten >= philo->state->to_eat)
+		{
+			pthread_mutex_unlock(&philo->last_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&philo->last_mutex);
 		status(philo, "is sleeping");
 		sleeping(philo->state->tsleep, philo->state);
 		status(philo, "is thinking");
@@ -84,7 +104,9 @@ int	start(t_state *state, t_philo **philo)
 	{
 		if (pthread_create(&philo[i]->thread, NULL, start_routine, philo[i]))
 		{
-			state->someone_died = 1;
+			pthread_mutex_lock(&state->died_mutex);
+            state->someone_died = 1;
+            pthread_mutex_unlock(&state->died_mutex);
 			pthread_join(death, NULL);
 			j = -1;
 			while (++j < i)
