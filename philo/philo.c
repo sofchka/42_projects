@@ -57,7 +57,7 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	usleep(4000 * (philo->id + 1));
+	usleep(1000 * (philo->id % 2) * 50);
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	pthread_mutex_unlock(&philo->last_mutex);
