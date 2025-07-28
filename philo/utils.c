@@ -44,7 +44,7 @@ void	sleeping(long long time, t_state *state)
 			break ;
 		}
 		pthread_mutex_unlock(&state->died_mutex);
-		usleep(100);
+		usleep(50);
 	}
 }
 
@@ -89,15 +89,5 @@ int	eating(t_philo *philo)
 	sleeping(philo->state->teat, philo->state);
 	pthread_mutex_unlock(&philo->state->fork[second]);
 	pthread_mutex_unlock(&philo->state->fork[first]);
-	// pthread_mutex_lock(&philo->state->fork[second]);
-	// status(philo, "has taken a fork");
-	// pthread_mutex_lock(&philo->last_mutex);
-	// philo->last = get_time();
-	// pthread_mutex_unlock(&philo->last_mutex);
-	// status(philo, "is eating");
-	// philo->eaten++;
-	// sleeping(philo->state->teat, philo->state);
-	// pthread_mutex_unlock(&philo->state->fork[second]);
-	// pthread_mutex_unlock(&philo->state->fork[first]);
 	return (0);
 }
