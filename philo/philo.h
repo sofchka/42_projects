@@ -41,7 +41,7 @@ int			start(t_state *state, t_philo **philo);
 int			args(int ac, char **av, struct s_state *s);
 
 void		status(t_philo *philo, char *str);
-
+void	ft_free(t_state	*state, t_philo	**phi);
 long long	get_time(void);
 int			eating(t_philo *philo);
 void		dead(t_philo *philo);

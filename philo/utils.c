@@ -23,7 +23,10 @@ void	dead(t_philo *philo)
 	printf("%lld %d died\n", get_time() - philo->state->start_time,
 		philo->id + 1);
 	pthread_mutex_unlock(&philo->state->print);
+	ft_free(philo->state, &philo);
+	exit(1);
 }
+
 
 void	sleeping(long long time, t_state *state)
 {

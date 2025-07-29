@@ -31,7 +31,7 @@ void	*monitor(void *arg)
 		{
 			pthread_mutex_lock(&p[i]->last_mutex);
 			time_since_last = get_time() - p[i]->last;
-			if (time_since_last > p[i]->state->tdie)
+			if (time_since_last > p[i]->state->tdie && (p[i]->eaten < p[i]->state->to_eat || p[i]->state->to_eat == -1))
 			{
 				pthread_mutex_unlock(&p[i]->last_mutex);
 				printf("DEBUG: Philo %d starved, last meal %lldms ago\n", p[i]->id + 1, time_since_last);
@@ -57,7 +57,7 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	usleep((philo->id % 2) * 200);
+	usleep((philo->id % 2) * 20000);
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	pthread_mutex_unlock(&philo->last_mutex);
