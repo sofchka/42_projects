@@ -31,7 +31,7 @@ void	*monitor(void *arg)
 		{
 			pthread_mutex_lock(&p[i]->last_mutex);
 			time_since_last = get_time() - p[i]->last;
-			if (time_since_last >= p[i]->state->tdie)
+			if (time_since_last > p[i]->state->tdie)
 			{
 				pthread_mutex_unlock(&p[i]->last_mutex);
 				printf("DEBUG: Philo %d starved, last meal %lldms ago\n", p[i]->id + 1, time_since_last);
@@ -47,7 +47,7 @@ void	*monitor(void *arg)
 			end("✅ All philos have eaten enough: DONE\n", p);
 			return (NULL);
 		}
-		usleep(500);
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -57,7 +57,7 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	usleep(1000 * (philo->id % 2) * 50);
+	usleep((philo->id % 2) * 200);
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	pthread_mutex_unlock(&philo->last_mutex);

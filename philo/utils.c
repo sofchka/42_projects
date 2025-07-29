@@ -3,7 +3,7 @@
 void	status(t_philo *phi, char *s)
 {
 	pthread_mutex_lock(&phi->state->died_mutex);
-	if (phi->state->someone_died)
+	if (phi->state->someone_died == 1)
 	{
 		pthread_mutex_unlock(&phi->state->died_mutex);
 		return ;
@@ -17,17 +17,12 @@ void	status(t_philo *phi, char *s)
 void	dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->state->died_mutex);
-	if (!philo->state->someone_died)
-	{
-		philo->state->someone_died = 1;
-		pthread_mutex_unlock(&philo->state->died_mutex);
-		pthread_mutex_lock(&philo->state->print);
-		printf("%lld %d died\n", get_time() - philo->state->start_time,
-			philo->id + 1);
-		pthread_mutex_unlock(&philo->state->print);
-	}
-	else
-		pthread_mutex_unlock(&philo->state->died_mutex);
+	philo->state->someone_died = 1;
+	pthread_mutex_unlock(&philo->state->died_mutex);
+	pthread_mutex_lock(&philo->state->print);
+	printf("%lld %d died\n", get_time() - philo->state->start_time,
+		philo->id + 1);
+	pthread_mutex_unlock(&philo->state->print);
 }
 
 void	sleeping(long long time, t_state *state)
@@ -80,11 +75,20 @@ int	eating(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_lock(&philo->state->fork[second]);
-	status(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->state->died_mutex);
+	if (philo->state->someone_died)
+	{
+		pthread_mutex_unlock(&philo->state->died_mutex);
+		pthread_mutex_unlock(&philo->state->fork[second]);
+		pthread_mutex_unlock(&philo->state->fork[first]);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->state->died_mutex);
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	philo->eaten++;
 	pthread_mutex_unlock(&philo->last_mutex);
+	status(philo, "has taken a fork");
 	status(philo, "is eating");
 	sleeping(philo->state->teat, philo->state);
 	pthread_mutex_unlock(&philo->state->fork[second]);
