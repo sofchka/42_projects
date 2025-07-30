@@ -2,25 +2,30 @@
 
 void	ft_free(t_state	*state, t_philo	**phi)
 {
-	int		i;
+	int	i;
 
-	if (state->fork)
-		free(state->fork);
 	if (phi)
 	{
 		i = -1;
 		while (++i < state->n)
 		{
-			pthread_mutex_destroy(&state->fork[i]);
-			pthread_mutex_destroy(&phi[i]->last_mutex);
 			if (phi[i])
+			{
+				pthread_mutex_destroy(&phi[i]->last_mutex);
 				free(phi[i]);
+			}
 		}
-		pthread_mutex_destroy(&state->print);
-		pthread_mutex_destroy(&state->died_mutex);
-		if (phi)
-			free(phi);
+		free(phi);
 	}
+	if (state->fork)
+	{
+		i = -1;
+		while (++i < state->n)
+			pthread_mutex_destroy(&state->fork[i]);
+		free(state->fork);
+	}
+	pthread_mutex_destroy(&state->print);
+	pthread_mutex_destroy(&state->died_mutex);
 }
 
 int	main(int ac, char **av)
