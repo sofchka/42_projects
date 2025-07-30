@@ -1,7 +1,7 @@
 NAME		=	philo
 
-SRCS		=	error.c init.c main.c philo.c utils.c
-				
+SRCS		=	error.c init.c main.c philo.c utils.c utils2.c
+
 OBJS		=	$(SRCS:.c=.o)
 
 CC			=	cc

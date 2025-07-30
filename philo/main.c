@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/30 19:54:15 by szakarya          #+#    #+#             */
+/*   Updated: 2025/07/30 19:54:17 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	ft_free(t_state	*state, t_philo	**phi)
@@ -39,7 +51,15 @@ int	main(int ac, char **av)
 		phi = create(&state, -1, NULL);
 		if (!phi)
 			return (1);
-		if (start(&state, phi))
+		if (state.n == 1)
+		{
+			printf("0 1 has taken a fork\n");
+			usleep((state.tdie + 1) * 1000);
+			printf("%d 1 died\n", state.tdie + 1);
+			ft_free(&state, phi);
+			return (1);
+		}
+		if (start(&state, phi, -1))
 		{
 			ft_free(&state, phi);
 			return (1);

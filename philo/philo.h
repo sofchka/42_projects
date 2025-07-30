@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/30 19:54:39 by szakarya          #+#    #+#             */
+/*   Updated: 2025/07/30 19:54:42 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <limits.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <sys/time.h>
-# include <pthread.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {
@@ -17,7 +30,7 @@ typedef struct s_philo
 	long long		last;
 	struct s_state	*state;
 	pthread_t		thread;
-}	t_philo;
+}					t_philo;
 
 typedef struct s_state
 {
@@ -31,20 +44,22 @@ typedef struct s_state
 	pthread_mutex_t	died_mutex;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
-}	t_state;
+}					t_state;
 
-int			ft_error(char *str);
-int			ft_atoi(const char *str);
+int					ft_error(char *str);
+long				ft_atoi(const char *str);
 
-t_philo		**create(t_state *s, int i, t_philo **philo);
-int			start(t_state *state, t_philo **philo);
-int			args(int ac, char **av, struct s_state *s);
+void				*monitor(void *arg);
+void				*start_routine(void *arg);
+t_philo				**create(t_state *s, int i, t_philo **philo);
+int					start(t_state *state, t_philo **philo, int i);
+int					args(int ac, char **av, struct s_state *s);
 
-void		status(t_philo *philo, char *str);
-void	ft_free(t_state	*state, t_philo	**phi);
-long long	get_time(void);
-int			eating(t_philo *philo);
-void		dead(t_philo *philo);
-void		sleeping(long long time, t_state *state);
+void				status(t_philo *philo, char *str);
+void				ft_free(t_state *state, t_philo **phi);
+long long			get_time(void);
+int					eating(t_philo *philo);
+void				dead(t_philo *philo);
+void				sleeping(long long time, t_state *state);
 
 #endif

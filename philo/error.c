@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/30 19:53:38 by szakarya          #+#    #+#             */
+/*   Updated: 2025/07/30 19:53:52 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 size_t	ft_strlen(const char *str)
@@ -19,29 +31,31 @@ int	ft_error(char *str)
 	return (1);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	j;
-	int	res;
+	int		i;
+	long	res;
 
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] < '0' || str[i] > '9' || str[i] == '-')
+			return (-1);
+	}
 	i = 0;
-	j = 1;
 	res = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			j = -1;
 		i++;
-	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
-	return (res * j);
+	if (res <= INT_MIN || res > INT_MAX)
+		return (-1);
+	return (res);
 }
 
 int	args(int ac, char **av, t_state *s)

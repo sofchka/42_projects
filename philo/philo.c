@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/30 19:54:24 by szakarya          #+#    #+#             */
+/*   Updated: 2025/07/30 19:54:26 by szakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	end(char *str, t_philo	**philos)
@@ -7,40 +19,55 @@ void	end(char *str, t_philo	**philos)
 	pthread_mutex_unlock(&philos[0]->state->print);
 }
 
+int	monitor_2(t_philo **p, int i, int *all_ate)
+{
+	long long	time_since_last;
+
+	pthread_mutex_lock(&p[i]->last_mutex);
+	time_since_last = get_time() - p[i]->last;
+	if ((p[i]->eaten < p[i]->state->to_eat || p[i]->state->to_eat == -1)
+		&& time_since_last > p[i]->state->tdie)
+	{
+		pthread_mutex_unlock(&p[i]->last_mutex);
+		dead(p[i]);
+		return (1);
+	}
+	if (p[i]->state->to_eat != -1 && p[i]->eaten >= p[i]->state->to_eat)
+		(*all_ate)++;
+	pthread_mutex_unlock(&p[i]->last_mutex);
+	return (0);
+}
+
+int	dead_case(t_philo **p)
+{
+	pthread_mutex_lock(&p[0]->state->died_mutex);
+	if (p[0]->state->someone_died)
+	{
+		pthread_mutex_unlock(&p[0]->state->died_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&p[0]->state->died_mutex);
+	return (0);
+}
+
 void	*monitor(void *arg)
 {
 	t_philo		**p;
 	int			i;
 	int			all_ate;
-	long long	time_since_last;
 
 	p = (t_philo **)arg;
 	usleep(5000);
 	while (1)
 	{
-		pthread_mutex_lock(&p[0]->state->died_mutex);
-		if (p[0]->state->someone_died)
-		{
-			pthread_mutex_unlock(&p[0]->state->died_mutex);
+		if (dead_case(p) == 1)
 			return (NULL);
-		}
-		pthread_mutex_unlock(&p[0]->state->died_mutex);
 		all_ate = 0;
 		i = -1;
 		while (++i < p[0]->state->n)
 		{
-			pthread_mutex_lock(&p[i]->last_mutex);
-			time_since_last = get_time() - p[i]->last;
-			if (time_since_last > p[i]->state->tdie && (p[i]->eaten < p[i]->state->to_eat || p[i]->state->to_eat == -1))
-			{
-				pthread_mutex_unlock(&p[i]->last_mutex);
-				printf("DEBUG: Philo %d starved, last meal %lldms ago\n", p[i]->id + 1, time_since_last);
-				dead(p[i]);
+			if (monitor_2(p, i, &all_ate) == 1)
 				return (NULL);
-			}
-			if (p[i]->state->to_eat != -1 && p[i]->eaten >= p[i]->state->to_eat)
-				all_ate++;
-			pthread_mutex_unlock(&p[i]->last_mutex);
 		}
 		if (p[0]->state->to_eat != -1 && all_ate == p[0]->state->n)
 		{
@@ -57,19 +84,14 @@ void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	usleep((philo->id % 2) * 20000);
+	usleep((philo->id % 2) * 10000);
 	pthread_mutex_lock(&philo->last_mutex);
 	philo->last = get_time();
 	pthread_mutex_unlock(&philo->last_mutex);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->state->died_mutex);
-		if (philo->state->someone_died)
-		{
-			pthread_mutex_unlock(&philo->state->died_mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->state->died_mutex);
+		if (dead_case(&philo) == 1)
+			return (NULL);
 		if (eating(philo))
 			break ;
 		pthread_mutex_lock(&philo->last_mutex);
@@ -84,34 +106,4 @@ void	*start_routine(void *arg)
 		status(philo, "is thinking");
 	}
 	return (NULL);
-}
-
-int	start(t_state *state, t_philo **philo)
-{
-	int			i;
-	int			j;
-	pthread_t	death;
-
-	if (pthread_create(&death, NULL, monitor, philo))
-		return (1);
-	i = -1;
-	while (++i < state->n)
-	{
-		if (pthread_create(&philo[i]->thread, NULL, start_routine, philo[i]))
-		{
-			pthread_mutex_lock(&state->died_mutex);
-			state->someone_died = 1;
-			pthread_mutex_unlock(&state->died_mutex);
-			pthread_join(death, NULL);
-			j = -1;
-			while (++j < i)
-				pthread_join(philo[j]->thread, NULL);
-			return (1);
-		}
-	}
-	pthread_join(death, NULL);
-	i = -1;
-	while (++i < state->n)
-		pthread_join(philo[i]->thread, NULL);
-	return (0);
 }
