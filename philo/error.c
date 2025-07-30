@@ -47,7 +47,7 @@ int	ft_atoi(const char *str)
 int	args(int ac, char **av, t_state *s)
 {
 	if (ac < 5 || ac > 6)
-		return (ft_error("Error\n🔴 nInput 4 or 5 arguments"));
+		return (ft_error("Error\n🔴 Input 4 or 5 arguments"));
 	s->n = ft_atoi(av[1]);
 	if (s->n < 1 || s->n > 200)
 		return (ft_error("Error\n🔴 Invalid number of philosophers"));

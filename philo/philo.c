@@ -47,7 +47,7 @@ void	*monitor(void *arg)
 			end("✅ All philos have eaten enough: DONE\n", p);
 			return (NULL);
 		}
-		usleep(100);
+		usleep(500);
 	}
 	return (NULL);
 }
