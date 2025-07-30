@@ -8,9 +8,10 @@ void	status(t_philo *phi, char *s)
 		pthread_mutex_unlock(&phi->state->died_mutex);
 		return ;
 	}
-	pthread_mutex_unlock(&phi->state->died_mutex);
 	pthread_mutex_lock(&phi->state->print);
-	printf("%lld %d %s (eaten: %d)\n", get_time() - phi->state->start_time, phi->id + 1, s, phi->eaten);
+	pthread_mutex_unlock(&phi->state->died_mutex);
+	printf("%lld %d %s (eaten: %d)\n", get_time() - phi->state->start_time,
+		phi->id + 1, s, phi->eaten);
 	pthread_mutex_unlock(&phi->state->print);
 }
 
@@ -23,10 +24,7 @@ void	dead(t_philo *philo)
 	printf("%lld %d died\n", get_time() - philo->state->start_time,
 		philo->id + 1);
 	pthread_mutex_unlock(&philo->state->print);
-	ft_free(philo->state, &philo);
-	exit(1);
 }
-
 
 void	sleeping(long long time, t_state *state)
 {
