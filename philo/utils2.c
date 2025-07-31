@@ -58,7 +58,7 @@ void	sleeping(long long time, t_state *state)
 
 int	start(t_state *state, t_philo **philo, int i)
 {
-	int			j;
+	int		j;
 	pthread_t	death;
 
 	if (pthread_create(&death, NULL, monitor, philo))

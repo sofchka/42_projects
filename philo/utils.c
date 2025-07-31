@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	smaller(int a, int b, int *c)
+int	small(int a, int b, int *c)
 {
 	if (a < b)
 	{
@@ -51,7 +51,7 @@ int	eating(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->state->died_mutex);
-	first = smaller(philo->left_fork, philo->right_fork, &second);
+	first = small(philo->left_fork, philo->right_fork, &second);
 	pthread_mutex_lock(&philo->state->fork[first]);
 	if (eating_2(philo, first, second) == 1)
 		return (1);

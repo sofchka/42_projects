@@ -72,7 +72,7 @@ t_philo	**create(t_state *s, int i, t_philo **philo)
 				pthread_mutex_destroy(&s->fork[i]);
 			pthread_mutex_destroy(&s->print);
 			pthread_mutex_destroy(&s->died_mutex);
-			return (err("Error\nMutex init failed", philo, s));
+			return (err("Error\nMutex init failed2", philo, s));
 		}
 	}
 	i = -1;

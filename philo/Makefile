@@ -8,7 +8,7 @@ CC			=	cc
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Wextra -Werror
 
 all:		$(NAME)
 

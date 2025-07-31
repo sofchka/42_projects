@@ -47,7 +47,7 @@ typedef struct s_state
 }					t_state;
 
 int					ft_error(char *str);
-long				ft_atoi(const char *str);
+long				ft_atol(const char *str);
 
 void				*monitor(void *arg);
 void				*start_routine(void *arg);
