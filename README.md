@@ -8,7 +8,10 @@ A collection of my core projects at 42 Yerevan. Each folder contains the subject
 2. **ft_printf** ✅ [100/100]  
 3. **Born2beroot** ✅ [115/100]  
 4. **get_next_line** ✅ [125/100]  
-5. **push_swap** ✅ [99/100]  
+5. **push_swap** ✅ [99/100]
+6. **pipex** ✅ [100/100]
+7. **so_long** ✅ [125/100]
+8. **Philosophers** ✅ [100/100] 
 
 Short and simple.  
 Still in progress.
